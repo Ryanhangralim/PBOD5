@@ -56,4 +56,12 @@ abstract class Produk{
     public int get_stok(){
         return this.stok;
     }
+
+    public void tambah_stok(int stok){
+        this.stok = this.stok + stok;
+    }
+
+    public void kurang_stok(int stok){
+        this.stok = this.stok - stok;
+    }
 }
