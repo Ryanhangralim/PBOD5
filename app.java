@@ -3,7 +3,9 @@ public class app {
         System.out.println("Hello World!");
         Pelanggan _pelanggan = new Pelanggan();
 
-        _pelanggan.set_pelanggan("Budi", "08123456789", "Jl. Jalan No. 1");
+        _pelanggan.setNama("Rizky Khapidsyah");
+        _pelanggan.setNomorTelepon("081234567890");
+        _pelanggan.setAlamat("Jl. Raya Bogor KM. 30");
 
         System.out.println(_pelanggan.getNama());
         System.out.println("Nomor Telepon: " + _pelanggan.getNomorTelepon());
