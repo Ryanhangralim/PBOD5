@@ -10,7 +10,7 @@ public class MySQLConn {
 
     String url = "jdbc:mysql://localhost:3306/kimaifarma";
     String username = "root";
-    String password = "Mismag0203i9";
+    String password = "";
 
     try {
       conn = DriverManager.getConnection(url, username, password);
