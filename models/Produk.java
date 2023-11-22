@@ -1,11 +1,13 @@
 package models;
 
+import java.time.LocalDate;
+
 abstract class Produk {
   private String id;
   private String nama;
   private String merek;
   private String produsen;
-  private String tanggal_produksi;
+  private LocalDate tanggal_produksi;
   private int harga;
   private int stok;
 
@@ -41,11 +43,11 @@ abstract class Produk {
     return this.produsen;
   }
 
-  public void set_tanggalproduksi(String tanggal_produksi) {
+  public void set_tanggalproduksi(LocalDate tanggal_produksi) {
     this.tanggal_produksi = tanggal_produksi;
   }
 
-  public String get_tanggalproduksi() {
+  public LocalDate get_tanggalproduksi() {
     return this.tanggal_produksi;
   }
 
