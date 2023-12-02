@@ -2,6 +2,12 @@
 
 Project Mata Kuliah Pemrograman Berorientasi Objek UNUD 2023
 
+Create .env:
+```
+DB_USER=root
+DB_PASS=YOUR_DB_PASS
+```
+
 migrations:
 CREATE TABLE `medicines` (
 `ID` int NOT NULL AUTO_INCREMENT,
