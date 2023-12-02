@@ -55,7 +55,7 @@ public class ManagerInventori {
     return this.username;
   }
 
-    public void set_password(String password) {
+  public void set_password(String password) {
     this.password = password;
   }
 
@@ -63,15 +63,15 @@ public class ManagerInventori {
     return this.password;
   }
 
-  public int save(){
+  public int save() {
     int newManager = 0;
 
     try {
       Connection conn = MySQLConn.getConnection();
 
-      // Insert kalau manager baru    
+      // Insert kalau manager baru
       if (this.get_id() == null) {
-        String sql = "INSERT INTO inventory_managers(username, password, name, telephone_number, address VALUES(?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO inventory_managers(username, password, name, telephone_number, address) VALUES(?, ?, ?, ?, ?)";
         PreparedStatement insertNewManager = conn.prepareStatement(sql);
 
         insertNewManager.setString(1, get_username());
@@ -84,7 +84,7 @@ public class ManagerInventori {
       }
       // Update kalau manager sudah ada
       else {
-        String sql = "UPDATE INTO inventory_managers(username, password, name, telephone_number, address VALUES(?, ?, ?, ?, ?) WHERE ID = ?";
+        String sql = "UPDATE INTO inventory_managers(username, password, name, telephone_number, address) VALUES(?, ?, ?, ?, ?) WHERE ID = ?";
         PreparedStatement updateManager = conn.prepareStatement(sql);
 
         updateManager.setString(1, get_username());
@@ -102,7 +102,7 @@ public class ManagerInventori {
     return newManager;
   }
 
-  public static void delete(int ID){
+  public static void delete(int ID) {
     try {
       Connection conn = MySQLConn.getConnection();
       String sql = "DELETE FROM inventory_managers WHERE ID = ?";
@@ -113,7 +113,7 @@ public class ManagerInventori {
       deleteManagers.executeUpdate();
     } catch (Exception e) {
       System.out.println(e);
-  }
+    }
   }
 
   public static ResultSet getAll() {
@@ -129,7 +129,7 @@ public class ManagerInventori {
       System.out.println(e);
       return null;
     }
-  } 
+  }
 
   public static ResultSet getByID(int ID) {
     try {
