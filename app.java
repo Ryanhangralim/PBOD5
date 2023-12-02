@@ -1,6 +1,7 @@
 import java.sql.ResultSet;
 import java.time.LocalDate;
 
+import models.ManagerInventori;
 import models.Obat;
 
 public class app {
@@ -22,15 +23,27 @@ public class app {
 
     // obat.save();
 
-    try {
-      ResultSet obat = Obat.getByID(3);
-      while (obat.next()) {
-        System.out.println(obat.getString("name"));
-        System.out.println(obat.getString("brand"));
-        System.out.println();
-      }
-    } catch (Exception e) {
-      System.out.println(e);
-    }
+    // try {
+    // ResultSet obat = Obat.getByID(3);
+    // while (obat.next()) {
+    // System.out.println(obat.getString("name"));
+    // System.out.println(obat.getString("brand"));
+    // System.out.println();
+    // }
+    // } catch (Exception e) {
+    // System.out.println(e);
+    // }
+
+    // ManagerInventori managerSteven = new ManagerInventori();
+
+    // managerSteven.set_nama("Steven Belva");
+    // managerSteven.set_nomortelepon("081339683882");
+    // managerSteven.set_alamat("Jalan Mertasari Indah");
+    // managerSteven.set_username("stevenbelva");
+    // managerSteven.set_password("stevenbelva123");
+
+    // managerSteven.save();
+
+    ManagerInventori.delete(2);
   }
 }
