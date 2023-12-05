@@ -48,6 +48,6 @@ public class app {
     // ManagerInventori.delete(2);
 
     Inventaris inventaris = new Inventaris();
-    invetntaris.setVisible(true);
+    inventaris.setVisible(true);
   }
 }
