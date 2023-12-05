@@ -3,6 +3,7 @@ import java.time.LocalDate;
 
 import models.ManagerInventori;
 import models.Obat;
+import view.Inventaris;
 
 public class app {
   public static void main(String[] args) {
@@ -34,16 +35,19 @@ public class app {
     // System.out.println(e);
     // }
 
-    ManagerInventori managerSteven = new ManagerInventori();
+    // ManagerInventori managerSteven = new ManagerInventori();
 
-    managerSteven.set_nama("Steven Belva");
-    managerSteven.set_nomortelepon("081339683882");
-    managerSteven.set_alamat("Jalan Mertasari Indah");
-    managerSteven.set_username("stevenbelva");
-    managerSteven.set_password("stevenbelva123");
+    // managerSteven.set_nama("Steven Belva");
+    // managerSteven.set_nomortelepon("081339683882");
+    // managerSteven.set_alamat("Jalan Mertasari Indah");
+    // managerSteven.set_username("stevenbelva");
+    // managerSteven.set_password("stevenbelva123");
 
-    managerSteven.save();
+    // managerSteven.save();
 
     // ManagerInventori.delete(2);
+
+    Inventaris inventaris = new Inventaris();
+    invetntaris.setVisible(true);
   }
 }
