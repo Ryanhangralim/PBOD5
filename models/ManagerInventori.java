@@ -1,5 +1,8 @@
 package models;
 
+import java.io.FileWriter;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -81,6 +84,22 @@ public class ManagerInventori {
         insertNewManager.setString(5, get_alamat());
 
         newManager = insertNewManager.executeUpdate();
+
+        // Masukkan ke .txt
+        // Mendapatkan path dari directory "models"
+        Path modelsPath = Paths.get("models");
+
+        // Mendapatkan path dari file "manager.txt" di dalam directory "data"
+        Path dataFilePath = modelsPath.resolveSibling("data").resolve("manager.txt");
+
+        // FileWriter fw = new FileWriter("C:/Users/Steven
+        // Ciam/Documents/PBOD5/models");
+        FileWriter fw = new FileWriter(dataFilePath.toString(), true);
+
+        fw.write(this.nama + ";" + this.nomor_telepon + ";" + this.alamat + ";" + this.username + ";"
+            + this.password + ";\n");
+
+        fw.close();
       }
       // Update kalau manager sudah ada
       else {
