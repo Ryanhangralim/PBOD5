@@ -85,4 +85,21 @@ CREATE TABLE `supplier` (
   `address` varchar(45) NOT NULL,
   PRIMARY KEY (`ID`)
  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
- ```
+
+CREATE TABLE `carts` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `total_qty` int NOT NULL,
+  `total_price` int NOT NULL,
+  `desktop` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `cart_items` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `cartId` varchar(45) NOT NULL,
+  `productId` varchar(45) NOT NULL,
+  `qty` varchar(45) NOT NULL,
+  `product_code` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+```
