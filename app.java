@@ -93,13 +93,7 @@ public class app {
     // supplier.set_alamat("Jalan udayana");
 
     // supplier.save();
-<<<<<<< HEAD
-
-    mainpage mainpage = new mainpage();
-    mainpage.setVisible(true);
-=======
     Login login = new Login();
     login.setVisible(true);
->>>>>>> d00815d4ef5cfd6a98401b722a290c8d17011b40
   }
 }
