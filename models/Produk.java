@@ -3,7 +3,7 @@ package models;
 import java.time.LocalDate;
 
 abstract class Produk {
-  private String id;
+  private Integer id;
   private String nama;
   private String merek;
   private String produsen;
@@ -11,11 +11,11 @@ abstract class Produk {
   private int harga;
   private int stok;
 
-  public void set_id(String id) {
+  public void set_id(Integer id) {
     this.id = id;
   }
 
-  public String get_id() {
+  public Integer get_id() {
     return this.id;
   }
 

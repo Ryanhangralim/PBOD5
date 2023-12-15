@@ -2,15 +2,17 @@ package config;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import io.github.cdimascio.dotenv.Dotenv;
 
 public class MySQLConn {
+  private static Dotenv dotenv = Dotenv.load();
   private static Connection conn;
 
   static {
 
     String url = "jdbc:mysql://localhost:3306/kimaifarma";
-    String username = "root";
-    String password = "Mismag0203i9";
+    String username = dotenv.get("DB_USER");
+    String password = dotenv.get("DB_PASS");
 
     try {
       conn = DriverManager.getConnection(url, username, password);
