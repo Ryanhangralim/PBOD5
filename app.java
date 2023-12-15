@@ -8,6 +8,7 @@ import models.Supplier;
 import view.Inventaris;
 import view.Login;
 import view.mainpage;
+import view.tambahAlat;
 import view.tambahObat;
 
 public class app {
@@ -95,7 +96,7 @@ public class app {
     // supplier.set_alamat("Jalan udayana");
 
     // supplier.save();
-    tambahObat obat = new tambahObat(null, false);
+    tambahAlat obat = new tambahAlat(null, false);
     obat.setVisible(true);
   }
 }

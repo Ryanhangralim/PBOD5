@@ -1,5 +1,9 @@
 package view;
 
+import java.time.LocalDate;
+
+import models.AlatKesehatan;
+
 public class tambahAlat extends javax.swing.JDialog {
 
     /**
@@ -114,7 +118,7 @@ public class tambahAlat extends javax.swing.JDialog {
         });
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel14.setText("Tanggal Produksi");
+        jLabel14.setText("Tanggal Produksi (YYYY-MM-DD)");
 
         beratField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -288,11 +292,26 @@ public class tambahAlat extends javax.swing.JDialog {
     }                                            
 
     private void tambahButtonMouseClicked(java.awt.event.MouseEvent evt) {                                          
-        // TODO add your handling code here:
+        AlatKesehatan alat = new AlatKesehatan();
+        if(!(namaField.getText().isEmpty() || brandField.getText().isEmpty() || produsenField.getText().isEmpty() || hargaField.getText().isEmpty() || stockField.getText().isEmpty() || jenisField.getText().isEmpty() || tglProduksiField.getText().isEmpty() || beratField.getText().isEmpty())){
+            alat.set_nama(namaField.getText());
+            alat.set_merek(brandField.getText());
+            alat.set_produsen(produsenField.getText());
+            alat.set_tanggalproduksi(LocalDate.parse(tglProduksiField.getText()));
+            alat.set_harga(Integer.parseInt(hargaField.getText()));
+            alat.set_stok(Integer.parseInt(hargaField.getText()));
+            alat.set_jenisalat(jenisField.getText());
+            alat.set_berat(Integer.parseInt(beratField.getText()));
+            alat.save();
+            this.dispose();
+        }
+        else{
+            System.out.println("Belum lengkap goblog");
+        }
     }                                         
 
     private void cancelButtonMouseClicked(java.awt.event.MouseEvent evt) {                                          
-        // TODO add your handling code here:
+        this.dispose();
     }                                         
 
     /**
