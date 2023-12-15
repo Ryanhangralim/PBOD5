@@ -1,4 +1,5 @@
 package view;
+import models.ManagerInventori;
 
 public class Login extends javax.swing.JFrame {
 
@@ -205,6 +206,20 @@ public class Login extends javax.swing.JFrame {
 
     private void loginButtonMouseClicked(java.awt.event.MouseEvent evt) {                                         
         // TODO add your handling code here:
+        String username = userField.getText();
+        char[] password = passField.getPassword();
+        String password_string = String.valueOf(password);
+        System.out.println(password_string);
+
+        if(ManagerInventori.checkUsername(username)){
+            if(ManagerInventori.checkPassword(username, password_string)){
+                //lanjutan kalau username password benar
+                System.out.println("User valid");
+            }
+            else{
+                System.out.println("User tidak valid");
+            }
+        }
     }                                        
 
     /**

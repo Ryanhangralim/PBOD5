@@ -1,12 +1,12 @@
 // import java.sql.ResultSet;
 // import java.time.LocalDate;
 
-// import models.Kosmetik;
-// import models.ManagerInventori;
-// import models.Obat;
-// import models.Supplier;
-// import view.Inventaris;
-import view.mainpage;
+import models.Kosmetik;
+import models.ManagerInventori;
+import models.Obat;
+import models.Supplier;
+import view.Inventaris;
+import view.Login;
 
 public class app {
   public static void main(String[] args) {
@@ -39,6 +39,25 @@ public class app {
     // }
 
     // ManagerInventori managerSteven = new ManagerInventori();
+    // ResultSet hasil = ManagerInventori.getByID(2);
+    // int idPengguna;
+    // try{
+    //   if(hasil.next()){
+    //     idPengguna = hasil.getInt("username");
+    //     System.out.println(idPengguna);
+    //   }
+    // } catch (Exception e) {
+    //   System.out.println(e);
+    // }
+      // String idPengguna;
+      // try{
+      //   if(hasil.next()){
+      //     idPengguna = hasil.getString("username");
+      //     System.out.println(idPengguna);
+      //   }
+      // } catch (Exception e) {
+      //   System.out.println(e);
+      // }
 
     // managerSteven.set_nama("Steven Belva");
     // managerSteven.set_nomortelepon("081339683882");
@@ -74,8 +93,13 @@ public class app {
     // supplier.set_alamat("Jalan udayana");
 
     // supplier.save();
+<<<<<<< HEAD
 
     mainpage mainpage = new mainpage();
     mainpage.setVisible(true);
+=======
+    Login login = new Login();
+    login.setVisible(true);
+>>>>>>> d00815d4ef5cfd6a98401b722a290c8d17011b40
   }
 }

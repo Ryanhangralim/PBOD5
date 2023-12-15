@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
  
 import config.MySQLConn;
@@ -165,4 +166,57 @@ public class ManagerInventori {
       return null;
     }
   }
+
+  public static boolean checkUsername(String username) {
+    int count = 0;
+    PreparedStatement checkManagerusername = null;
+    ResultSet valid = null;
+    try {
+      Connection conn = MySQLConn.getConnection();
+      String sql = "SELECT COUNT(username) FROM inventory_managers WHERE username = ?";
+      checkManagerusername = conn.prepareStatement(sql);
+
+      checkManagerusername.setString(1, username);
+      valid = checkManagerusername.executeQuery();
+      if(valid.next()){
+        count = valid.getInt(1);
+      }
+      if (count > 0){
+        return true;
+      }
+      else{
+        return false;
+      }
+    } catch(SQLException e){
+      System.out.println(e);
+      return false;
+    }
+  }
+
+public static boolean checkPassword(String username, String password) {
+  String userPassword;
+  PreparedStatement checkPassword = null;
+  ResultSet valid = null;
+  try {
+    Connection conn = MySQLConn.getConnection();
+    String sql = "SELECT password FROM inventory_managers WHERE username = ?";
+    checkPassword= conn.prepareStatement(sql);
+
+    checkPassword.setString(1, username);
+    valid = checkPassword.executeQuery();
+    if(valid.next()){
+      userPassword = valid.getString(1);
+      if(userPassword.equals(password)){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+    return false;
+  } catch(SQLException e){
+    System.out.println(e);
+    return false;
+  }
+}
 }
