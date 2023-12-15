@@ -72,7 +72,6 @@ CREATE TABLE `cosmetic` (
   `production_date` date NOT NULL,
   `price` int NOT NULL,
   `stock` int NOT NULL,
-  `category` varchar(45) NOT NULL,
   `expired_date` date NOT NULL,
   `cosmetic_type` varchar(45) NOT NULL,
   `weight` int NOT NULL,
