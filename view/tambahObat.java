@@ -1,5 +1,9 @@
 package view;
 
+import java.time.LocalDate;
+
+import models.Obat;
+
 public class tambahObat extends javax.swing.JDialog {
 
     /**
@@ -118,7 +122,7 @@ public class tambahObat extends javax.swing.JDialog {
         });
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel14.setText("Tanggal Produksi");
+        jLabel14.setText("Tanggal Produksi (YYYY-MM-DD)");
 
         tglExpField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,7 +131,7 @@ public class tambahObat extends javax.swing.JDialog {
         });
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel15.setText("Tanggal Expired");
+        jLabel15.setText("Tanggal Expired (YYYY-MM-DD)");
 
         efekField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -334,7 +338,24 @@ public class tambahObat extends javax.swing.JDialog {
     }                                            
 
     private void tambahButtonMouseClicked(java.awt.event.MouseEvent evt) {                                          
-        this.dispose();
+        Obat obatBaru = new Obat();
+        if(!(namaField.getText().isEmpty() || brandField.getText().isEmpty() || produsenField.getText().isEmpty() || hargaField.getText().isEmpty() || stockField.getText().isEmpty() || jenisField.getText().isEmpty() || tglProduksiField.getText().isEmpty() || tglExpField.getText().isEmpty() || efekField.getText().isEmpty() || dosisField.getText().isEmpty())){
+            obatBaru.set_nama(namaField.getText());
+            obatBaru.set_merek(brandField.getText());
+            obatBaru.set_produsen(produsenField.getText());
+            obatBaru.set_harga(Integer.parseInt(hargaField.getText()));
+            obatBaru.set_stok(Integer.parseInt(stockField.getText()));
+            obatBaru.set_jenis(jenisField.getText());
+            obatBaru.set_tanggalproduksi(LocalDate.parse(tglProduksiField.getText()));
+            obatBaru.set_tanggalkadaluwarsa(LocalDate.parse(tglExpField.getText()));
+            obatBaru.set_efeksamping(efekField.getText());
+            obatBaru.set_dosis(dosisField.getText());
+            obatBaru.save();
+            this.dispose();
+        }
+        else{
+            System.out.println("Belum lengkap goblog");
+        }
     }                                         
 
     private void cancelButtonMouseClicked(java.awt.event.MouseEvent evt) {                                          

@@ -7,6 +7,8 @@ import models.Obat;
 import models.Supplier;
 import view.Inventaris;
 import view.Login;
+import view.mainpage;
+import view.tambahObat;
 
 public class app {
   public static void main(String[] args) {
@@ -93,7 +95,7 @@ public class app {
     // supplier.set_alamat("Jalan udayana");
 
     // supplier.save();
-    Login login = new Login();
-    login.setVisible(true);
+    tambahObat obat = new tambahObat(null, false);
+    obat.setVisible(true);
   }
 }
