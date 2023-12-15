@@ -1,12 +1,14 @@
 import java.sql.ResultSet;
 import java.time.LocalDate;
-import java.util.List;
 
 import models.Cart;
 import models.CartItem;
+import models.Kosmetik;
 import models.ManagerInventori;
 import models.Obat;
+import models.Supplier;
 import view.Inventaris;
+import view.Login;
 
 public class app {
   public static void main(String[] args) {
@@ -39,6 +41,25 @@ public class app {
     // }
 
     // ManagerInventori managerSteven = new ManagerInventori();
+    // ResultSet hasil = ManagerInventori.getByID(2);
+    // int idPengguna;
+    // try{
+    // if(hasil.next()){
+    // idPengguna = hasil.getInt("username");
+    // System.out.println(idPengguna);
+    // }
+    // } catch (Exception e) {
+    // System.out.println(e);
+    // }
+    // String idPengguna;
+    // try{
+    // if(hasil.next()){
+    // idPengguna = hasil.getString("username");
+    // System.out.println(idPengguna);
+    // }
+    // } catch (Exception e) {
+    // System.out.println(e);
+    // }
 
     // managerSteven.set_nama("Steven Belva");
     // managerSteven.set_nomortelepon("081339683882");
@@ -50,19 +71,45 @@ public class app {
 
     // ManagerInventori.delete(2);
 
-    // Tes cart
-    Cart.addProduct(1, 3, 2, 10000, 101);
-    Cart.addProduct(1, 1, 1, 100000, 102);
-
-    // Print cart item
-    List<CartItem> cartItemList = Cart.seeCart();
-    for (CartItem cartItem : cartItemList) {
-      System.out.println(cartItem.getName());
-      System.out.println(cartItem.getQty());
-      System.out.println(cartItem.getTotal());
-    }
-
     // Inventaris inventaris = new Inventaris();
     // inventaris.setVisible(true);
+    // Inventaris inventaris = new Inventaris();
+    // inventaris.setVisible(true);
+
+    // Kosmetik kosmetik = new Kosmetik();
+    // kosmetik.set_id(null);
+    // kosmetik.set_nama("Pembesar ********");
+    // kosmetik.set_merek("Pasti besar");
+    // kosmetik.set_produsen("Besar");
+    // kosmetik.set_tanggalproduksi(LocalDate.of(2022, 5, 19));
+    // kosmetik.set_harga(192168);
+    // kosmetik.set_stok(89);
+    // kosmetik.set_tanggalkadaluwarsa(LocalDate.of(2025, 12, 9));
+    // kosmetik.set_jeniskosmetik("Bodycare");
+    // kosmetik.set_beratbersih(50);
+
+    // kosmetik.save();
+
+    // Supplier supplier = new Supplier();
+    // supplier.set_id(null);
+    // supplier.set_nama("ChawNiMaLe");
+    // supplier.set_nomortelepon("08188818181818");
+    // supplier.set_alamat("Jalan udayana");
+
+    // supplier.save();
+    Login login = new Login();
+    login.setVisible(true);
+
+    // Tes cart
+    // Cart.addProduct(1, 3, 2, 10000, 101);
+    // Cart.addProduct(1, 1, 1, 100000, 102);
+
+    // // Print cart item
+    // List<CartItem> cartItemList = Cart.seeCart();
+    // for (CartItem cartItem : cartItemList) {
+    // System.out.println(cartItem.getName());
+    // System.out.println(cartItem.getQty());
+    // System.out.println(cartItem.getTotal());
+    // }
   }
 }
