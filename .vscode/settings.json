@@ -1,11 +1,7 @@
 {
 	"java.project.referencedLibraries": [
     "lib/**/*.jar",
-    "c:\\Users\\Steven Ciam\\Downloads\\mysql-connector-java-8.0.30.jar",
-    "c:\\Users\\User\\Downloads\\mysql-connector-java-8.0.30.jar",
-    "c:\\Users\\Steven Ciam\\Downloads\\JAR file for java\\dotenv-java-3.0.0.jar",
-    "c:\\Users\\Steven Ciam\\Downloads\\JAR file for java\\mysql-connector-java-8.0.30.jar",
-    "c:\\Users\\Steven Ciam\\Downloads\\JAR file PBO project\\dotenv-java-3.0.0.jar",
-    "c:\\Users\\Steven Ciam\\Downloads\\JAR file PBO project\\mysql-connector-java-8.0.30.jar"
+    "c:\\Users\\ryanh\\Downloads\\Temp\\Jar\\mysql-connector-java-8.0.30.jar",
+    "c:\\Users\\ryanh\\Downloads\\Temp\\Jar\\dotenv-java-3.0.0.jar"
   ]
 }
