@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import models.Kosmetik;
 import models.ManagerInventori;
 import models.Obat;
+import models.Supplier;
 import view.Inventaris;
 
 public class app {
@@ -64,5 +65,13 @@ public class app {
     kosmetik.set_beratbersih(50);
 
     kosmetik.save();
+
+    Supplier supplier = new Supplier();
+    supplier.set_id(null);
+    supplier.set_nama("ChawNiMaLe");
+    supplier.set_nomortelepon("08188818181818");
+    supplier.set_alamat("Jalan udayana");
+
+    supplier.save();
   }
 }
