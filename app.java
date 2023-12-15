@@ -1,8 +1,10 @@
 import java.sql.ResultSet;
 import java.time.LocalDate;
 
+import models.Kosmetik;
 import models.ManagerInventori;
 import models.Obat;
+import models.Supplier;
 import view.Inventaris;
 
 public class app {
@@ -47,7 +49,29 @@ public class app {
 
     // ManagerInventori.delete(2);
 
-    Inventaris inventaris = new Inventaris();
-    inventaris.setVisible(true);
+    // Inventaris inventaris = new Inventaris();
+    // inventaris.setVisible(true);
+
+    Kosmetik kosmetik = new Kosmetik();
+    kosmetik.set_id(null);
+    kosmetik.set_nama("Pembesar ********");
+    kosmetik.set_merek("Pasti besar");
+    kosmetik.set_produsen("Besar");
+    kosmetik.set_tanggalproduksi(LocalDate.of(2022, 5, 19));
+    kosmetik.set_harga(192168);
+    kosmetik.set_stok(89);
+    kosmetik.set_tanggalkadaluwarsa(LocalDate.of(2025, 12, 9));
+    kosmetik.set_jeniskosmetik("Bodycare");
+    kosmetik.set_beratbersih(50);
+
+    kosmetik.save();
+
+    Supplier supplier = new Supplier();
+    supplier.set_id(null);
+    supplier.set_nama("ChawNiMaLe");
+    supplier.set_nomortelepon("08188818181818");
+    supplier.set_alamat("Jalan udayana");
+
+    supplier.save();
   }
 }

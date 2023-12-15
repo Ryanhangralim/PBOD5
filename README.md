@@ -64,3 +64,24 @@ CREATE TABLE `supplements` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 ```
+CREATE TABLE `cosmetic` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `brand` varchar(45) NOT NULL,
+  `pharma` varchar(45) NOT NULL,
+  `production_date` date NOT NULL,
+  `price` int NOT NULL,
+  `stock` int NOT NULL,
+  `expired_date` date NOT NULL,
+  `cosmetic_type` varchar(45) NOT NULL,
+  `weight` int NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `supplier` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `telephone_number` varchar(45) NOT NULL,
+  `address` varchar(45) NOT NULL,
+  PRIMARY KEY (`ID`)
+ ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
