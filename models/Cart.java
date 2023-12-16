@@ -99,11 +99,12 @@ public class Cart {
     // Query
     String sql1 = "SELECT m.id, m.name, SUM(qty) AS qty, m.price*SUM(qty) AS total FROM cart_items ci JOIN medicines m ON ci.productId = m.id AND ci.product_code = m.product_code WHERE cartId = ? GROUP BY m.id";
     String sql2 = "SELECT sup.id, sup.name, SUM(qty) AS qty, sup.price*SUM(qty) AS total FROM cart_items ci JOIN supplements sup ON ci.productId = sup.id AND ci.product_code = sup.product_code WHERE cartId = ? GROUP BY sup.id";
+    String sql3 = "SELECT medeq.id, medeq.name, SUM(qty) AS qty, medeq.price*SUM(qty) AS total FROM cart_items ci JOIN medical_equipments medeq ON ci.productId = medeq.id AND ci.product_code = medeq.product_code WHERE cartId = ? GROUP BY medeq.id";
+    String sql4 = "SELECT cos.id, cos.name, SUM(qty) AS qty, cos.price*SUM(qty) AS total FROM cart_items ci JOIN cosmetic cos ON ci.productId = cos.id AND ci.product_code = cos.product_code WHERE cartId = ? GROUP BY cos.id";
     try {
       ResultSet cartItems;
 
       PreparedStatement seeCartMedicine = conn.prepareStatement(sql1);
-
       seeCartMedicine.setInt(1, 1);
       cartItems = seeCartMedicine.executeQuery();
 
@@ -118,13 +119,40 @@ public class Cart {
       }
 
       PreparedStatement seeCartSupplement = conn.prepareStatement(sql2);
-
       seeCartSupplement.setInt(1, 1);
       cartItems = seeCartSupplement.executeQuery();
 
       while (cartItems.next()) {
         int id = cartItems.getInt("sup.id");
         String name = cartItems.getString("sup.name");
+        int qty = cartItems.getInt("qty");
+        int total = cartItems.getInt("total");
+
+        CartItem newCartItem = new CartItem(id, name, qty, total);
+        cartItemList.add(newCartItem);
+      }
+
+      PreparedStatement seeCartMedeq = conn.prepareStatement(sql3);
+      seeCartMedeq.setInt(1, 1);
+      cartItems = seeCartMedeq.executeQuery();
+
+      while (cartItems.next()) {
+        int id = cartItems.getInt("medeq.id");
+        String name = cartItems.getString("medeq.name");
+        int qty = cartItems.getInt("qty");
+        int total = cartItems.getInt("total");
+
+        CartItem newCartItem = new CartItem(id, name, qty, total);
+        cartItemList.add(newCartItem);
+      }
+
+      PreparedStatement seeCartCosmetic = conn.prepareStatement(sql4);
+      seeCartCosmetic.setInt(1, 1);
+      cartItems = seeCartCosmetic.executeQuery();
+
+      while (cartItems.next()) {
+        int id = cartItems.getInt("cos.id");
+        String name = cartItems.getString("cos.name");
         int qty = cartItems.getInt("qty");
         int total = cartItems.getInt("total");
 
