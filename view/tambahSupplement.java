@@ -1,5 +1,10 @@
 package view;
 
+import java.time.LocalDate;
+
+import models.Kosmetik;
+import models.Suplemen;
+
 public class tambahSupplement extends javax.swing.JDialog {
 
     /**
@@ -118,7 +123,7 @@ public class tambahSupplement extends javax.swing.JDialog {
         });
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel14.setText("Tanggal Produksi");
+        jLabel14.setText("Tanggal Produksi (YYYY-MM-DD)");
 
         tglExpField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,7 +132,7 @@ public class tambahSupplement extends javax.swing.JDialog {
         });
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel15.setText("Tanggal Expired");
+        jLabel15.setText("Tanggal Expired (YYYY-MM-DD)");
 
         dosisField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -331,10 +336,30 @@ public class tambahSupplement extends javax.swing.JDialog {
 
     private void tambahButtonMouseClicked(java.awt.event.MouseEvent evt) {                                          
         // TODO add your handling code here:
+        Suplemen suplemenBaru = new Suplemen();
+        if(!(namaField.getText().isEmpty() || brandField.getText().isEmpty() || produsenField.getText().isEmpty() || hargaField.getText().isEmpty() || stockField.getText().isEmpty() || jenisField.getText().isEmpty() || tglProduksiField.getText().isEmpty() || tglExpField.getText().isEmpty() || dosisField.getText().isEmpty() || nutrisiField.getText().isEmpty())){
+            suplemenBaru.set_nama(namaField.getText());
+            suplemenBaru.set_merek(brandField.getText());
+            suplemenBaru.set_produsen(produsenField.getText());
+            suplemenBaru.set_harga(Integer.parseInt(hargaField.getText()));
+            suplemenBaru.set_stok(Integer.parseInt(stockField.getText()));
+            suplemenBaru.set_jenissuplemen(jenisField.getText());
+            suplemenBaru.set_tanggalproduksi(LocalDate.parse(tglProduksiField.getText()));
+            suplemenBaru.set_tanggalkadaluwarsa(LocalDate.parse(tglExpField.getText()));
+            suplemenBaru.set_dosis(dosisField.getText());
+            suplemenBaru.set_informasinutrisi(nutrisiField.getText());
+            suplemenBaru.save();
+            this.dispose();
+        }
+        else{
+            System.out.println("Belum lengkap goblog");
+        }
+        
     }                                         
 
     private void cancelButtonMouseClicked(java.awt.event.MouseEvent evt) {                                          
         // TODO add your handling code here:
+        this.dispose();
     }                                         
 
     /**
