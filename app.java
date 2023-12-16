@@ -1,5 +1,6 @@
 import java.sql.ResultSet;
 import java.time.LocalDate;
+import java.util.List;
 
 import models.Cart;
 import models.CartItem;
@@ -97,19 +98,19 @@ public class app {
     // supplier.set_alamat("Jalan udayana");
 
     // supplier.save();
-    Login login = new Login();
-    login.setVisible(true);
+    // Login login = new Login();
+    // login.setVisible(true);
 
     // Tes cart
     // Cart.addProduct(1, 3, 2, 10000, 101);
     // Cart.addProduct(1, 1, 1, 100000, 102);
 
     // // Print cart item
-    // List<CartItem> cartItemList = Cart.seeCart();
-    // for (CartItem cartItem : cartItemList) {
-    // System.out.println(cartItem.getName());
-    // System.out.println(cartItem.getQty());
-    // System.out.println(cartItem.getTotal());
-    // }
+    List<CartItem> cartItemList = Cart.seeCart();
+    for (CartItem cartItem : cartItemList) {
+      System.out.println(cartItem.getName());
+      System.out.println(cartItem.getQty());
+      System.out.println(cartItem.getTotal());
+    }
   }
 }

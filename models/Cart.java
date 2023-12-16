@@ -108,11 +108,12 @@ public class Cart {
       cartItems = seeCartMedicine.executeQuery();
 
       while (cartItems.next()) {
+        int id = cartItems.getInt("m.id");
         String name = cartItems.getString("m.name");
         int qty = cartItems.getInt("qty");
         int total = cartItems.getInt("total");
 
-        CartItem newCartItem = new CartItem(name, qty, total);
+        CartItem newCartItem = new CartItem(id, name, qty, total);
         cartItemList.add(newCartItem);
       }
 
@@ -122,11 +123,12 @@ public class Cart {
       cartItems = seeCartSupplement.executeQuery();
 
       while (cartItems.next()) {
+        int id = cartItems.getInt("sup.id");
         String name = cartItems.getString("sup.name");
         int qty = cartItems.getInt("qty");
         int total = cartItems.getInt("total");
 
-        CartItem newCartItem = new CartItem(name, qty, total);
+        CartItem newCartItem = new CartItem(id, name, qty, total);
         cartItemList.add(newCartItem);
       }
 
