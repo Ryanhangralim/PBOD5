@@ -9,6 +9,7 @@ import view.Inventaris;
 import view.Login;
 import view.mainpage;
 import view.tambahAlat;
+import view.tambahCosmetik;
 import view.tambahObat;
 
 public class app {
@@ -96,7 +97,7 @@ public class app {
     // supplier.set_alamat("Jalan udayana");
 
     // supplier.save();
-    tambahAlat obat = new tambahAlat(null, false);
+    tambahCosmetik obat = new tambahCosmetik(null, false);
     obat.setVisible(true);
   }
 }
