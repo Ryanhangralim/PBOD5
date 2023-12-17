@@ -5,13 +5,10 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.TableCellRenderer;
-import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.table.TableCellRenderer;
 
 public class mainpage extends javax.swing.JFrame {
 
@@ -20,6 +17,7 @@ public class mainpage extends javax.swing.JFrame {
      */
     public mainpage() {
         initComponents();
+
     }
 
     /**
@@ -75,20 +73,7 @@ public class mainpage extends javax.swing.JFrame {
         jTable1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Nama", "Merek", "Produsen", "Tanggal Produksi", "Harga", "Stok", ""
@@ -123,7 +108,9 @@ public class mainpage extends javax.swing.JFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 String selectedOption = jComboBox1.getSelectedItem().toString();
                 if (selectedOption.equals("Log Out")) {
-                    System.exit(0); // Shut down the program
+                    Login login = new Login();
+                    login.setVisible(true);
+                    dispose();
                 }
             }
         });
@@ -166,6 +153,11 @@ public class mainpage extends javax.swing.JFrame {
             }
         });
 
+
+        
+        //nambah ke tabel
+        addRowToJTable();
+        
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -258,26 +250,25 @@ public class mainpage extends javax.swing.JFrame {
 
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            // Set the button text and appearance
-            setText("Button " + (row + 1));
+            setText("Detail");
             return this;
         }
     }
 
     private class ButtonEditor extends DefaultCellEditor {
         private JButton button;
-        private JTable table; // Reference to the table
+        private JTable table;
     
         public ButtonEditor(JTable table) {
             super(new JTextField());
-            this.table = table; // Set the reference to the table
+            this.table = table;
             button = new JButton("Detail");
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    // Handle button click (System.out.println or any other action)
                     int selectedRow = table.getSelectedRow();
                     System.out.println("Button clicked in row: " + selectedRow);
+                    // Add your logic here based on the selected row
                 }
             });
         }
@@ -286,6 +277,19 @@ public class mainpage extends javax.swing.JFrame {
         public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
             return button;
         }
+    }
+
+    private void addRowToJTable() {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        Object rowData[] = new Object[8];
+        rowData[0] = 1;
+        rowData[1] = "Paracetamol";
+        rowData[2] = "Paramex";
+        rowData[3] = "Kalbe";
+        rowData[4] = "16/06/2021";
+        rowData[5] = 10000;
+        rowData[6] = 100;
+        model.addRow(rowData);
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
