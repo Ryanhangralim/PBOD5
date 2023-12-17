@@ -1,12 +1,13 @@
 // import java.sql.ResultSet;
 // import java.time.LocalDate;
 
-import models.Kosmetik;
-import models.ManagerInventori;
-import models.Obat;
-import models.Supplier;
-import view.Inventaris;
-import view.Login;
+// import models.Kosmetik;
+// import models.ManagerInventori;
+// import models.Obat;
+// import models.Supplier;
+// import view.Inventaris;
+// import view.Login;
+import view.mainpage;
 
 public class app {
   public static void main(String[] args) {
@@ -93,7 +94,7 @@ public class app {
     // supplier.set_alamat("Jalan udayana");
 
     // supplier.save();
-    Login login = new Login();
-    login.setVisible(true);
+    mainpage main = new mainpage();
+    main.setVisible(true);
   }
 }
