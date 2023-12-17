@@ -48,7 +48,7 @@ public class Suplemen extends Produk {
   }
 
   public int save() {
-    int newSupplement= 0;
+    int newSupplement = 0;
 
     try {
       Connection conn = MySQLConn.getConnection();
@@ -141,4 +141,21 @@ public class Suplemen extends Produk {
     }
   }
 
+  public static void updateStock(int id, int qty) {
+    // Get MySQL connection
+    Connection conn = MySQLConn.getConnection();
+    // Query
+    String sql = "UPDATE supplements SET stock = stock + ? WHERE id = ?";
+
+    try (PreparedStatement updateSupplement = conn.prepareStatement(sql)) {
+      updateSupplement.setInt(1, qty);
+      updateSupplement.setInt(2, id);
+
+      updateSupplement.executeUpdate();
+
+    } catch (Exception e) {
+      // TODO: handle exception
+      System.out.println("Failed to update supplement stock" + e);
+    }
+  }
 }

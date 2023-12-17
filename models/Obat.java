@@ -141,4 +141,22 @@ public class Obat extends Produk {
       return null;
     }
   }
+
+  public static void updateStock(int id, int qty) {
+    // Get MySQL connection
+    Connection conn = MySQLConn.getConnection();
+    // Query
+    String sql = "UPDATE medicines SET stock = stock + ? WHERE id = ?";
+
+    try (PreparedStatement updateMedicine = conn.prepareStatement(sql)) {
+      updateMedicine.setInt(1, qty);
+      updateMedicine.setInt(2, id);
+
+      updateMedicine.executeUpdate();
+
+    } catch (Exception e) {
+      // TODO: handle exception
+      System.out.println("Failed to update medicine stock" + e);
+    }
+  }
 }
