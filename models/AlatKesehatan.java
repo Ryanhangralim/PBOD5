@@ -64,7 +64,6 @@ public class AlatKesehatan extends Produk {
         updateEquipment.setString(7, this.get_jenisalat());
         updateEquipment.setInt(8, this.get_berat());
 
-
         newEquipment = updateEquipment.executeUpdate();
       }
     } catch (Exception e) {
@@ -116,6 +115,24 @@ public class AlatKesehatan extends Produk {
     } catch (Exception e) {
       System.out.println(e);
       return null;
+    }
+  }
+
+  public static void updateStock(int id, int qty) {
+    // Get MySQL connection
+    Connection conn = MySQLConn.getConnection();
+    // Query
+    String sql = "UPDATE medical_equipments SET stock = stock + ? WHERE id = ?";
+
+    try (PreparedStatement updateMedicalEquipment = conn.prepareStatement(sql)) {
+      updateMedicalEquipment.setInt(1, qty);
+      updateMedicalEquipment.setInt(2, id);
+
+      updateMedicalEquipment.executeUpdate();
+
+    } catch (Exception e) {
+      // TODO: handle exception
+      System.out.println("Failed to update medical equipment stock" + e);
     }
   }
 }

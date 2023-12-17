@@ -129,4 +129,22 @@ public class Kosmetik extends Produk {
       return null;
     }
   }
+
+  public static void updateStock(int id, int qty) {
+    // Get MySQL connection
+    Connection conn = MySQLConn.getConnection();
+    // Query
+    String sql = "UPDATE cosmetic SET stock = stock + ? WHERE id = ?";
+
+    try (PreparedStatement updateCosmetic = conn.prepareStatement(sql)) {
+      updateCosmetic.setInt(1, qty);
+      updateCosmetic.setInt(2, id);
+
+      updateCosmetic.executeUpdate();
+
+    } catch (Exception e) {
+      // TODO: handle exception
+      System.out.println("Failed to update cosmetic stock" + e);
+    }
+  }
 }

@@ -1,5 +1,6 @@
 // import java.sql.ResultSet;
 // import java.time.LocalDate;
+// import java.util.List;
 
 import models.Kosmetik;
 import models.ManagerInventori;
@@ -7,15 +8,24 @@ import models.Obat;
 import models.Supplier;
 import view.Inventaris;
 import view.Login;
-import view.mainpage;
 import view.tambahAlat;
 import view.tambahCosmetik;
 import view.tambahObat;
 import view.tambahSupplement;
+import view.mainpage;
+// import models.Cart;
+// import models.CartItem;
+// import models.Kosmetik;
+// import models.ManagerInventori;
+// import models.Obat;
+// import models.Supplier;
+// import view.Inventaris;
+// import view.Login;
+
 
 public class app {
   public static void main(String[] args) {
-    System.out.println("Hello World!");
+    // System.out.println("Hello World!");
     // Obat obat = new Obat();
 
     // obat.set_id(null);
@@ -47,22 +57,22 @@ public class app {
     // ResultSet hasil = ManagerInventori.getByID(2);
     // int idPengguna;
     // try{
-    //   if(hasil.next()){
-    //     idPengguna = hasil.getInt("username");
-    //     System.out.println(idPengguna);
-    //   }
-    // } catch (Exception e) {
-    //   System.out.println(e);
+    // if(hasil.next()){
+    // idPengguna = hasil.getInt("username");
+    // System.out.println(idPengguna);
     // }
-      // String idPengguna;
-      // try{
-      //   if(hasil.next()){
-      //     idPengguna = hasil.getString("username");
-      //     System.out.println(idPengguna);
-      //   }
-      // } catch (Exception e) {
-      //   System.out.println(e);
-      // }
+    // } catch (Exception e) {
+    // System.out.println(e);
+    // }
+    // String idPengguna;
+    // try{
+    // if(hasil.next()){
+    // idPengguna = hasil.getString("username");
+    // System.out.println(idPengguna);
+    // }
+    // } catch (Exception e) {
+    // System.out.println(e);
+    // }
 
     // managerSteven.set_nama("Steven Belva");
     // managerSteven.set_nomortelepon("081339683882");
@@ -74,6 +84,8 @@ public class app {
 
     // ManagerInventori.delete(2);
 
+    // Inventaris inventaris = new Inventaris();
+    // inventaris.setVisible(true);
     // Inventaris inventaris = new Inventaris();
     // inventaris.setVisible(true);
 
@@ -98,7 +110,22 @@ public class app {
     // supplier.set_alamat("Jalan udayana");
 
     // supplier.save();
-    tambahSupplement obat = new tambahSupplement(null, false);
-    obat.setVisible(true);
+
+    // Login login = new Login();
+    // login.setVisible(true);
+
+    // Tes cart
+    // Cart.addProduct(1, 3, 2, 10000, 101);
+    // Cart.addProduct(1, 1, 1, 100000, 102);
+
+    // // Print cart item
+    // List<CartItem> cartItemList = Cart.seeCart();
+    // for (CartItem cartItem : cartItemList) {
+    //   System.out.println(cartItem.getName());
+    //   System.out.println(cartItem.getQty());
+    //   System.out.println(cartItem.getTotal());
+
+    mainpage Mainpage = new mainpage();
+    Mainpage.setVisible(true);
   }
 }
