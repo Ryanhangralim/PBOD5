@@ -1,14 +1,21 @@
 package view;
 
+import javax.swing.AbstractCellEditor;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 public class mainpage extends javax.swing.JFrame {
 
@@ -154,7 +161,6 @@ public class mainpage extends javax.swing.JFrame {
         });
 
 
-        
         //nambah ke tabel
         addRowToJTable();
         
@@ -207,90 +213,159 @@ public class mainpage extends javax.swing.JFrame {
 
     private String selectedCategory = null; // Store the selected category                                          
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
-    }    
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {    
+        refresh();
+    }
+    
+    private void refresh() {
+        tableData.clear();
+
+        // Generate data based on the selected category
+        switch (selectedCategory) {
+            case "Obat":
+                addDataForCategory("Obat", 5);
+                break;
+            case "Kosmetik":
+                addDataForCategory("Kosmetik", 5);
+                break;
+            case "Alat Kesehatan":
+                addDataForCategory("Alat Kesehatan", 5);
+                break;
+            case "Suplemen":
+                addDataForCategory("Suplemen", 5);
+                break;
+            default:
+                break;
+        }
+
+        // Update the table
+        addRowToJTable();
+    } 
+
+    private void addDataForCategory(String category, int rowCount) {
+        for (int i = 0; i < rowCount; i++) {
+            List<Object> rowData = new ArrayList<>();
+            addRow(category, rowData);
+            tableData.add(rowData);
+        }
+    }
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {
         // Store the selected category when the combo box selection changes
         selectedCategory = jComboBox2.getSelectedItem().toString();
+        refresh();
     }
 
+    private List<List<Object>> tableData = new ArrayList<>();
+
+    private void addRowToJTable() {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0); // Clear existing rows
+    
+        for (List<Object> rowData : tableData) {
+            model.addRow(rowData.toArray());
+        }
+    }
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
         // Handle the "Tambah Produk" button click
         if (selectedCategory != null) {
+            List<Object> rowData = new ArrayList<>();
+    
             switch (selectedCategory) {
                 case "Obat":
-                    // new tambahObat().setVisible(true);
-                    System.out.println("Obat");
+                    tambahObat obat = new tambahObat(this, true);
+                    obat.setVisible(true);
                     break;
                 case "Kosmetik":
-                    // new tambahCosmetik().setVisible(true);
-                    System.out.println("Kosmetik");
+                    tambahCosmetik kosmetik = new tambahCosmetik(this, true);
+                    kosmetik.setVisible(true);
                     break;
                 case "Alat Kesehatan":
-                    // new tambahAlat().setVisible(true);
-                    System.out.println("Alat Kesehatan");
+                    tambahAlat alat = new tambahAlat(this, true);
+                    alat.setVisible(true);
                     break;
                 case "Suplemen":
-                    // new tambahSupplement().setVisible(true);
-                    System.out.println("Suplemen");
+                    tambahSupplement supplement = new tambahSupplement(this, true);
+                    supplement.setVisible(true);
                     break;
                 default:
-                    // Handle other cases if needed
                     break;
             }
+    
+            tableData.add(rowData);
+
+            refresh();
         }
+    
+        selectedCategory = jComboBox2.getSelectedItem().toString();
+    }
+    
+    
+    private void addRow(String category, List<Object> rowData) {
+        // Generate random values for demonstration purposes
+        int id = (int) (Math.random() * 1000);
+        String name = category + "-" + String.format("%02d", id);
+        String brand = "Brand-" + String.format("%02d", id);
+        String manufacturer = "Manufacturer-" + String.format("%02d", id);
+        String date = "01/01/2022";
+        int price = (int) (Math.random() * 100000);
+        int stock = (int) (Math.random() * 100);
+    
+        rowData.add(id);
+        rowData.add(name);
+        rowData.add(brand);
+        rowData.add(manufacturer);
+        rowData.add(date);
+        rowData.add(price);
+        rowData.add(stock);
     }                                      
 
-    private static class ButtonRenderer extends JButton implements TableCellRenderer {
+    private class ButtonRenderer extends JButton implements TableCellRenderer {
         public ButtonRenderer() {
             setOpaque(true);
         }
-
+    
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             setText("Detail");
             return this;
         }
     }
-
-    private class ButtonEditor extends DefaultCellEditor {
+    
+    private class ButtonEditor extends AbstractCellEditor implements TableCellEditor, ActionListener {
         private JButton button;
         private JTable table;
-    
+        private int row;
+        
         public ButtonEditor(JTable table) {
-            super(new JTextField());
             this.table = table;
-            button = new JButton("Detail");
-            button.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    int selectedRow = table.getSelectedRow();
-                    System.out.println("Button clicked in row: " + selectedRow);
-                    // Add your logic here based on the selected row
-                }
-            });
+            this.button = new JButton("Detail");
+            this.button.addActionListener(this);
+            this.button.setFocusPainted(false);
         }
-    
+
+        @Override
+        public Object getCellEditorValue() {
+            return null; // Since the button value is not needed
+        }
+
         @Override
         public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+            this.row = row;
             return button;
         }
-    }
 
-    private void addRowToJTable() {
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        Object rowData[] = new Object[8];
-        rowData[0] = 1;
-        rowData[1] = "Paracetamol";
-        rowData[2] = "Paramex";
-        rowData[3] = "Kalbe";
-        rowData[4] = "16/06/2021";
-        rowData[5] = 10000;
-        rowData[6] = 100;
-        model.addRow(rowData);
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // Handle button click here
+            System.out.println("Button clicked in row: " + row);
+            // Add your logic here based on the selected row
+            fireEditingStopped(); // Notify that editing has stopped
+        }
     }
+    
+
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
