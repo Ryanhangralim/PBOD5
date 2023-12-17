@@ -1,15 +1,16 @@
-import java.sql.ResultSet;
-import java.time.LocalDate;
-import java.util.List;
+// import java.sql.ResultSet;
+// import java.time.LocalDate;
+// import java.util.List;
 
-import models.Cart;
-import models.CartItem;
-import models.Kosmetik;
-import models.ManagerInventori;
-import models.Obat;
-import models.Supplier;
-import view.Inventaris;
-import view.Login;
+// import models.Cart;
+// import models.CartItem;
+// import models.Kosmetik;
+// import models.ManagerInventori;
+// import models.Obat;
+// import models.Supplier;
+// import view.Inventaris;
+// import view.Login;
+import view.mainpage;
 
 public class app {
   public static void main(String[] args) {
@@ -106,11 +107,13 @@ public class app {
     // Cart.addProduct(1, 1, 1, 100000, 102);
 
     // // Print cart item
-    List<CartItem> cartItemList = Cart.seeCart();
-    for (CartItem cartItem : cartItemList) {
-      System.out.println(cartItem.getName());
-      System.out.println(cartItem.getQty());
-      System.out.println(cartItem.getTotal());
-    }
+    // List<CartItem> cartItemList = Cart.seeCart();
+    // for (CartItem cartItem : cartItemList) {
+    //   System.out.println(cartItem.getName());
+    //   System.out.println(cartItem.getQty());
+    //   System.out.println(cartItem.getTotal());
+
+    mainpage Mainpage = new mainpage();
+    Mainpage.setVisible(true);
   }
 }
