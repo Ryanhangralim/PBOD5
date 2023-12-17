@@ -1,5 +1,10 @@
 package view;
 
+import java.time.LocalDate;
+
+import models.Kosmetik;
+import models.Obat;
+
 public class tambahCosmetik extends javax.swing.JDialog {
 
     /**
@@ -116,7 +121,7 @@ public class tambahCosmetik extends javax.swing.JDialog {
         });
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel14.setText("Tanggal Produksi");
+        jLabel14.setText("Tanggal Produksi (YYYY-MM-DD)");
 
         tglExpField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,7 +130,7 @@ public class tambahCosmetik extends javax.swing.JDialog {
         });
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel15.setText("Tanggal Expired");
+        jLabel15.setText("Tanggal Expired (YYYY-MM-DD)");
 
         efekField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -314,10 +319,28 @@ public class tambahCosmetik extends javax.swing.JDialog {
 
     private void tambahButtonMouseClicked(java.awt.event.MouseEvent evt) {                                          
         // TODO add your handling code here:
+        Kosmetik kosmetikBaru = new Kosmetik();
+        if(!(namaField.getText().isEmpty() || brandField.getText().isEmpty() || produsenField.getText().isEmpty() || hargaField.getText().isEmpty() || stockField.getText().isEmpty() || jenisField.getText().isEmpty() || tglProduksiField.getText().isEmpty() || tglExpField.getText().isEmpty() || efekField.getText().isEmpty())){
+            kosmetikBaru.set_nama(namaField.getText());
+            kosmetikBaru.set_merek(brandField.getText());
+            kosmetikBaru.set_produsen(produsenField.getText());
+            kosmetikBaru.set_harga(Integer.parseInt(hargaField.getText()));
+            kosmetikBaru.set_stok(Integer.parseInt(stockField.getText()));
+            kosmetikBaru.set_jeniskosmetik(jenisField.getText());
+            kosmetikBaru.set_tanggalproduksi(LocalDate.parse(tglProduksiField.getText()));
+            kosmetikBaru.set_tanggalkadaluwarsa(LocalDate.parse(tglExpField.getText()));
+            kosmetikBaru.set_beratbersih(Integer.parseInt(efekField.getText()));
+            kosmetikBaru.save();
+            this.dispose();
+        }
+        else{
+            System.out.println("Belum lengkap goblog");
+        }
     }                                         
 
     private void cancelButtonMouseClicked(java.awt.event.MouseEvent evt) {                                          
         // TODO add your handling code here:
+        this.dispose();
     }                                         
 
     /**

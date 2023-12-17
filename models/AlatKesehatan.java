@@ -46,7 +46,7 @@ public class AlatKesehatan extends Produk {
         insertNewEquipment.setInt(5, this.get_harga());
         insertNewEquipment.setInt(6, this.get_stok());
         insertNewEquipment.setString(7, this.get_jenisalat());
-        insertNewEquipment.setInt(9, this.get_berat());
+        insertNewEquipment.setInt(8, this.get_berat());
 
         newEquipment = insertNewEquipment.executeUpdate();
       }
@@ -62,7 +62,7 @@ public class AlatKesehatan extends Produk {
         updateEquipment.setInt(5, this.get_harga());
         updateEquipment.setInt(6, this.get_stok());
         updateEquipment.setString(7, this.get_jenisalat());
-        updateEquipment.setInt(9, this.get_berat());
+        updateEquipment.setInt(8, this.get_berat());
 
         newEquipment = updateEquipment.executeUpdate();
       }

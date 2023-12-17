@@ -55,7 +55,7 @@ public class Suplemen extends Produk {
 
       // Insert kalau obat baru
       if (this.get_id() == null) {
-        String sql = "INSERT INTO supplements(name, brand, pharma, production_date, price, stock, category, expired_date, dose, category, nutrition) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO supplements(name, brand, pharma, production_date, price, stock, expired_date, dose, category, nutrition) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement insertNewSupplement = conn.prepareStatement(sql);
 
         insertNewSupplement.setString(1, this.get_nama());
@@ -65,15 +65,15 @@ public class Suplemen extends Produk {
         insertNewSupplement.setInt(5, this.get_harga());
         insertNewSupplement.setInt(6, this.get_stok());
         insertNewSupplement.setDate(7, Date.valueOf(this.get_tanggalkadaluwarsa()));
-        insertNewSupplement.setString(9, this.get_dosis());
-        insertNewSupplement.setString(10, this.get_jenissuplemen());
-        insertNewSupplement.setString(11, this.get_informasinutrisi());
+        insertNewSupplement.setString(8, this.get_dosis());
+        insertNewSupplement.setString(9, this.get_jenissuplemen());
+        insertNewSupplement.setString(10, this.get_informasinutrisi());
 
         newSupplement = insertNewSupplement.executeUpdate();
       }
       // Update kalau obat sudah ada
       else {
-        String sql = "UPDATE supplements(name, brand, pharma, production_date, price, stock, category, expired_date, dose, category, nutrition) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) WHERE ID = ?";
+        String sql = "UPDATE supplements(name, brand, pharma, production_date, price, stock, category, expired_date, dose, category, nutrition) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?) WHERE ID = ?";
         PreparedStatement updateSupplement = conn.prepareStatement(sql);
 
         updateSupplement.setString(1, this.get_nama());
@@ -83,9 +83,9 @@ public class Suplemen extends Produk {
         updateSupplement.setInt(5, this.get_harga());
         updateSupplement.setInt(6, this.get_stok());
         updateSupplement.setDate(7, Date.valueOf(this.get_tanggalkadaluwarsa()));
-        updateSupplement.setString(9, this.get_dosis());
-        updateSupplement.setString(10, this.get_jenissuplemen());
-        updateSupplement.setString(11, this.get_informasinutrisi());
+        updateSupplement.setString(8, this.get_dosis());
+        updateSupplement.setString(9, this.get_jenissuplemen());
+        updateSupplement.setString(10, this.get_informasinutrisi());
 
         newSupplement = updateSupplement.executeUpdate();
       }

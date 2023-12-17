@@ -2,6 +2,17 @@
 // import java.time.LocalDate;
 // import java.util.List;
 
+import models.Kosmetik;
+import models.ManagerInventori;
+import models.Obat;
+import models.Supplier;
+import view.Inventaris;
+import view.Login;
+import view.tambahAlat;
+import view.tambahCosmetik;
+import view.tambahObat;
+import view.tambahSupplement;
+import view.mainpage;
 // import models.Cart;
 // import models.CartItem;
 // import models.Kosmetik;
@@ -10,7 +21,7 @@
 // import models.Supplier;
 // import view.Inventaris;
 // import view.Login;
-import view.mainpage;
+
 
 public class app {
   public static void main(String[] args) {
@@ -99,6 +110,7 @@ public class app {
     // supplier.set_alamat("Jalan udayana");
 
     // supplier.save();
+
     // Login login = new Login();
     // login.setVisible(true);
 
