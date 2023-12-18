@@ -215,6 +215,7 @@ public class Login extends javax.swing.JFrame {
             if(ManagerInventori.checkPassword(username, password_string)){
                 //lanjutan kalau username password benar
                 System.out.println("User valid");
+                new mainpage().setVisible(true);
             }
             else{
                 System.out.println("User tidak valid");

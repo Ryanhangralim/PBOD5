@@ -216,8 +216,6 @@ public class mainpage extends javax.swing.JFrame {
     
     private void refresh() {
         tableData.clear();
-
-        // Generate data based on the selected category
         switch (selectedCategory) {
             case "Obat":
                 addDataForCategory("Obat", 100);
@@ -234,8 +232,6 @@ public class mainpage extends javax.swing.JFrame {
             default:
                 break;
         }
-
-        // Update the table
         addRowToJTable();
     } 
 
@@ -301,7 +297,7 @@ public class mainpage extends javax.swing.JFrame {
         int id = (int) (Math.random() * 1000);
         String name = category + "-" + String.format("%02d", id);
         String brand = "Brand-" + String.format("%02d", id);
-        String manufacturer = "Manufacturer-" + String.format("%02d", id);
+        String manufacturer = "Manufacturer-apa";
         String date = "01/01/2022";
         int price = (int) (Math.random() * 100000);
         int stock = (int) (Math.random() * 100);
