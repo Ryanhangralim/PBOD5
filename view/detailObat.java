@@ -1,13 +1,21 @@
 package view;
 
+import java.sql.ResultSet;
+
+import models.Obat;
+
 public class detailObat extends javax.swing.JDialog {
 
     /**
      * Creates new form tambahObat
      */
-    public detailObat(java.awt.Frame parent, boolean modal) {
+
+    java.awt.Frame parentFrame;
+
+    public detailObat(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
-        initComponents();
+        initComponents(id);
+        parentFrame = parent;
     }
 
     /**
@@ -17,7 +25,9 @@ public class detailObat extends javax.swing.JDialog {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
-    private void initComponents() {
+    private void initComponents(int id) {
+
+        ResultSet hasilObat = Obat.getByID(id);
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -46,6 +56,26 @@ public class detailObat extends javax.swing.JDialog {
         editButton = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
         idField = new javax.swing.JTextField();
+
+        if (hasilObat != null) {
+            try {
+                while (hasilObat.next()) {
+                    idField.setText(hasilObat.getString("ID"));
+                    namaField.setText(hasilObat.getString("name"));
+                    brandField.setText(hasilObat.getString("brand"));
+                    produsenField.setText(hasilObat.getString("pharma"));
+                    hargaField.setText(hasilObat.getString("price"));
+                    stockField.setText(hasilObat.getString("stock"));
+                    jenisField.setText(hasilObat.getString("category"));
+                    tglProduksiField.setText(hasilObat.getString("production_date"));
+                    tglExpField.setText(hasilObat.getString("expired_date"));
+                    efekField.setText(hasilObat.getString("side_effect"));
+                    dosisField.setText(hasilObat.getString("dose"));
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -361,11 +391,16 @@ public class detailObat extends javax.swing.JDialog {
         // TODO add your handling code here:
     }                                          
 
-    private void editButtonMouseClicked(java.awt.event.MouseEvent evt) {                                        
+    private void editButtonMouseClicked(java.awt.event.MouseEvent evt) { 
         this.dispose();
+        int id = Integer.parseInt(idField.getText());  
+        editObat dialog = new editObat(parentFrame, true, id);
+        dialog.setVisible(true);                                     
     }                                       
 
-    private void hapusButtonMouseClicked(java.awt.event.MouseEvent evt) {                                         
+    private void hapusButtonMouseClicked(java.awt.event.MouseEvent evt) {    
+        int id = Integer.parseInt(idField.getText());
+        Obat.delete(id);                                     
         this.dispose();
     }                                        
 
@@ -406,7 +441,7 @@ public class detailObat extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                detailObat dialog = new detailObat(new javax.swing.JFrame(), true);
+                detailObat dialog = new detailObat(new javax.swing.JFrame(), true, 1);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

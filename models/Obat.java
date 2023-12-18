@@ -16,7 +16,7 @@ public class Obat extends Produk {
   private LocalDate tanggal_kadaluwarsa;
   private String efek_samping;
   private String dosis;
-
+  
   public void set_jenis(String jenis) {
     this.jenis = jenis;
   }
@@ -75,7 +75,7 @@ public class Obat extends Produk {
       }
       // Update kalau obat sudah ada
       else {
-        String sql = "UPDATE medicines(name, brand, pharma, production_date, price, stock, category, expired_date, side_effect, dose) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?) WHERE ID = ?";
+        String sql = "UPDATE medicines SET name = ?, brand = ?, pharma = ?, production_date = ?, price = ?, stock = ?, category = ?, expired_date = ?, side_effect = ?, dose = ? WHERE ID = ?";
         PreparedStatement updateMedicine = conn.prepareStatement(sql);
 
         updateMedicine.setString(1, this.get_nama());
