@@ -1,13 +1,20 @@
 package view;
 
+import java.sql.ResultSet;
+
+import models.Kosmetik;
+import models.Obat;
+
 public class detailCosmetik extends javax.swing.JDialog {
 
     /**
      * Creates new form tambahObat
      */
-    public detailCosmetik(java.awt.Frame parent, boolean modal) {
+    java.awt.Frame parentFrame;
+    public detailCosmetik(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
-        initComponents();
+        initComponents(id);
+        parentFrame = parent;
     }
 
     /**
@@ -17,7 +24,9 @@ public class detailCosmetik extends javax.swing.JDialog {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
-    private void initComponents() {
+    private void initComponents(int id) {
+
+        ResultSet hasilKosmetik = Kosmetik.getByID(id);
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -38,12 +47,31 @@ public class detailCosmetik extends javax.swing.JDialog {
         jLabel14 = new javax.swing.JLabel();
         tglExpField = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        efekField = new javax.swing.JTextField();
+        beratField = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         hapusButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
         idField = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
+
+        if (hasilKosmetik != null) {
+            try {
+                while (hasilKosmetik.next()) {
+                    idField.setText(Integer.toString(hasilKosmetik.getInt("id")));
+                    namaField.setText(hasilKosmetik.getString("name"));
+                    brandField.setText(hasilKosmetik.getString("brand"));
+                    produsenField.setText(hasilKosmetik.getString("pharma"));
+                    hargaField.setText(Integer.toString(hasilKosmetik.getInt("price")));
+                    stockField.setText(Integer.toString(hasilKosmetik.getInt("stock")));
+                    jenisField.setText(hasilKosmetik.getString("cosmetic_type"));
+                    tglProduksiField.setText(hasilKosmetik.getString("production_date"));
+                    tglExpField.setText(hasilKosmetik.getString("expired_date"));
+                    beratField.setText(hasilKosmetik.getString("weight"));
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -137,10 +165,10 @@ public class detailCosmetik extends javax.swing.JDialog {
         jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel15.setText("Tanggal Expired");
 
-        efekField.setEditable(false);
-        efekField.addActionListener(new java.awt.event.ActionListener() {
+        beratField.setEditable(false);
+        beratField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                efekFieldActionPerformed(evt);
+                beratFieldActionPerformed(evt);
             }
         });
 
@@ -216,7 +244,7 @@ public class detailCosmetik extends javax.swing.JDialog {
                             .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
                             .addComponent(tglExpField)
                             .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
-                            .addComponent(efekField)
+                            .addComponent(beratField)
                             .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -272,7 +300,7 @@ public class detailCosmetik extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(efekField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(beratField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(hapusButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -326,7 +354,7 @@ public class detailCosmetik extends javax.swing.JDialog {
         // TODO add your handling code here:
     }                                           
 
-    private void efekFieldActionPerformed(java.awt.event.ActionEvent evt) {                                          
+    private void beratFieldActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
     }                                         
 
@@ -339,11 +367,16 @@ public class detailCosmetik extends javax.swing.JDialog {
     }                                          
 
     private void editButtonMouseClicked(java.awt.event.MouseEvent evt) {                                        
-        // TODO add your handling code here:
+        this.dispose();
+        int id = Integer.parseInt(idField.getText());  
+        editCosmetik dialog = new editCosmetik(parentFrame, true, id);
+        dialog.setVisible(true);
     }                                       
 
     private void hapusButtonMouseClicked(java.awt.event.MouseEvent evt) {                                         
-        // TODO add your handling code here:
+        int id = Integer.parseInt(idField.getText());
+        Kosmetik.delete(id);                                     
+        this.dispose();
     }                                        
 
     private void idFieldActionPerformed(java.awt.event.ActionEvent evt) {                                        
@@ -387,7 +420,7 @@ public class detailCosmetik extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                detailCosmetik dialog = new detailCosmetik(new javax.swing.JFrame(), true);
+                detailCosmetik dialog = new detailCosmetik(new javax.swing.JFrame(), true, 1);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -402,7 +435,7 @@ public class detailCosmetik extends javax.swing.JDialog {
     // Variables declaration - do not modify                     
     private javax.swing.JTextField brandField;
     private javax.swing.JButton editButton;
-    private javax.swing.JTextField efekField;
+    private javax.swing.JTextField beratField;
     private javax.swing.JButton hapusButton;
     private javax.swing.JTextField hargaField;
     private javax.swing.JTextField idField;

@@ -1,13 +1,20 @@
 package view;
 
+import java.sql.ResultSet;
+
+import models.Obat;
+import models.Suplemen;
+
 public class detailSupplement extends javax.swing.JDialog {
 
     /**
      * Creates new form tambahObat
      */
-    public detailSupplement(java.awt.Frame parent, boolean modal) {
+    java.awt.Frame parentFrame;
+    public detailSupplement(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
-        initComponents();
+        initComponents(id);
+        parentFrame = parent;
     }
 
     /**
@@ -17,7 +24,9 @@ public class detailSupplement extends javax.swing.JDialog {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
-    private void initComponents() {
+    private void initComponents(int id) {
+
+        ResultSet hasilSuplemen = Suplemen.getByID(id);
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -46,6 +55,26 @@ public class detailSupplement extends javax.swing.JDialog {
         editButton = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
         idField = new javax.swing.JTextField();
+
+        if (hasilSuplemen != null) {
+            try {
+                while (hasilSuplemen.next()) {
+                    idField.setText(Integer.toString(hasilSuplemen.getInt("id")));
+                    namaField.setText(hasilSuplemen.getString("name"));
+                    brandField.setText(hasilSuplemen.getString("brand"));
+                    produsenField.setText(hasilSuplemen.getString("pharma"));
+                    hargaField.setText(Integer.toString(hasilSuplemen.getInt("price")));
+                    stockField.setText(Integer.toString(hasilSuplemen.getInt("stock")));
+                    jenisField.setText(hasilSuplemen.getString("category"));
+                    tglProduksiField.setText(hasilSuplemen.getString("production_date"));
+                    tglExpField.setText(hasilSuplemen.getString("expired_date"));
+                    dosisField.setText(hasilSuplemen.getString("dose"));
+                    nutrisiField.setText(hasilSuplemen.getString("nutrition"));
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -357,11 +386,16 @@ public class detailSupplement extends javax.swing.JDialog {
     }                                          
 
     private void editButtonMouseClicked(java.awt.event.MouseEvent evt) {                                        
-        // TODO add your handling code here:
+        this.dispose();
+        int id = Integer.parseInt(idField.getText());  
+        editSupplement dialog = new editSupplement(parentFrame, true, id);
+        dialog.setVisible(true);
     }                                       
 
     private void hapusButtonMouseClicked(java.awt.event.MouseEvent evt) {                                         
-        // TODO add your handling code here:
+        int id = Integer.parseInt(idField.getText());
+        Suplemen.delete(id);                                     
+        this.dispose();
     }                                        
 
     private void idFieldActionPerformed(java.awt.event.ActionEvent evt) {                                        
@@ -405,7 +439,7 @@ public class detailSupplement extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                detailSupplement dialog = new detailSupplement(new javax.swing.JFrame(), true);
+                detailSupplement dialog = new detailSupplement(new javax.swing.JFrame(), true, 1);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

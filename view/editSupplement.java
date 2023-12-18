@@ -1,13 +1,20 @@
 package view;
 
+import java.time.LocalDate;
+
+import models.Suplemen;
+
 public class editSupplement extends javax.swing.JDialog {
 
     /**
      * Creates new form tambahObat
      */
-    public editSupplement(java.awt.Frame parent, boolean modal) {
+
+    int idSupplement;
+    public editSupplement(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
-        initComponents();
+        initComponents(id);
+        idSupplement = id;
     }
 
     /**
@@ -17,7 +24,7 @@ public class editSupplement extends javax.swing.JDialog {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
-    private void initComponents() {
+    private void initComponents(int id) {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -330,11 +337,29 @@ public class editSupplement extends javax.swing.JDialog {
     }                                          
 
     private void editButtonMouseClicked(java.awt.event.MouseEvent evt) {                                        
-        // TODO add your handling code here:
+        Suplemen suplemenBaru = new Suplemen();
+        suplemenBaru.set_id(idSupplement);
+        if(!(namaField.getText().isEmpty() || brandField.getText().isEmpty() || produsenField.getText().isEmpty() || hargaField.getText().isEmpty() || stockField.getText().isEmpty() || jenisField.getText().isEmpty() || tglProduksiField.getText().isEmpty() || tglExpField.getText().isEmpty() || dosisField.getText().isEmpty() || nutrisiField.getText().isEmpty())){
+            suplemenBaru.set_nama(namaField.getText());
+            suplemenBaru.set_merek(brandField.getText());
+            suplemenBaru.set_produsen(produsenField.getText());
+            suplemenBaru.set_harga(Integer.parseInt(hargaField.getText()));
+            suplemenBaru.set_stok(Integer.parseInt(stockField.getText()));
+            suplemenBaru.set_jenissuplemen(jenisField.getText());
+            suplemenBaru.set_tanggalproduksi(LocalDate.parse(tglProduksiField.getText()));
+            suplemenBaru.set_tanggalkadaluwarsa(LocalDate.parse(tglExpField.getText()));
+            suplemenBaru.set_dosis(dosisField.getText());
+            suplemenBaru.set_informasinutrisi(nutrisiField.getText());
+            suplemenBaru.save();
+            this.dispose();
+        }
+        else{
+            System.out.println("Belum lengkap goblog");
+        }
     }                                       
 
     private void cancelButtonMouseClicked(java.awt.event.MouseEvent evt) {                                          
-        // TODO add your handling code here:
+        this.dispose();
     }                                         
 
     /**
@@ -370,7 +395,7 @@ public class editSupplement extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                editSupplement dialog = new editSupplement(new javax.swing.JFrame(), true);
+                editSupplement dialog = new editSupplement(new javax.swing.JFrame(), true, 1);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
