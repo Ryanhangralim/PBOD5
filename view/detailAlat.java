@@ -5,9 +5,9 @@ public class detailAlat extends javax.swing.JDialog {
     /**
      * Creates new form tambahObat
      */
-    public detailAlat(java.awt.Frame parent, boolean modal) {
+    public detailAlat(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
-        initComponents();
+        initComponents(id);
     }
 
     /**
@@ -17,7 +17,7 @@ public class detailAlat extends javax.swing.JDialog {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
-    private void initComponents() {
+    private void initComponents(int id) {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();

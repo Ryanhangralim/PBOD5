@@ -1,4 +1,6 @@
 package view;
+import javax.swing.JOptionPane;
+
 import models.ManagerInventori;
 
 public class Login extends javax.swing.JFrame {
@@ -209,18 +211,21 @@ public class Login extends javax.swing.JFrame {
         String username = userField.getText();
         char[] password = passField.getPassword();
         String password_string = String.valueOf(password);
-        System.out.println(password_string);
 
         if(ManagerInventori.checkUsername(username)){
             if(ManagerInventori.checkPassword(username, password_string)){
-                //lanjutan kalau username password benar
-                System.out.println("User valid");
+                this.dispose();
+                mainpage main = new mainpage();
+                main.setVisible(true);
             }
             else{
-                System.out.println("User tidak valid");
+                JOptionPane.showMessageDialog(this, "Kata sandi tidak valid", "Kesalahan", JOptionPane.WARNING_MESSAGE);
             }
         }
-    }                                        
+        else{
+            JOptionPane.showMessageDialog(this, "Nama pengguna dan sandi tidak valid", "Kesalahan", JOptionPane.WARNING_MESSAGE);
+        }
+    }                                     
 
     /**
      * @param args the command line arguments
