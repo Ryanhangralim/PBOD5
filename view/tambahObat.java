@@ -2,6 +2,8 @@ package view;
 
 import java.time.LocalDate;
 
+import javax.swing.JOptionPane;
+
 import models.Obat;
 
 public class tambahObat extends javax.swing.JDialog {
@@ -354,7 +356,7 @@ public class tambahObat extends javax.swing.JDialog {
             this.dispose();
         }
         else{
-            System.out.println("Belum lengkap goblog");
+            JOptionPane.showMessageDialog(this, "Data belum lengkap", "Kesalahan", JOptionPane.WARNING_MESSAGE);
         }
     }                                         
 
