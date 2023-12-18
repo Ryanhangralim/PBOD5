@@ -6,11 +6,18 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.TableCellRenderer;
+
+import models.AlatKesehatan;
+import models.Kosmetik;
+import models.Obat;
+import models.Suplemen;
+
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -392,8 +399,56 @@ public class mainpage extends javax.swing.JFrame {
 
     //Search Button
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
-    }                                        
+        String search = jTextField1.getText();
+        switch (selectedCategory) {
+            case "Obat":
+                ResultSet obat = Obat.searchByName(search);
+                try {
+                    while (obat.next()) {
+                    // System.out.println(obat.getString("name"));
+                    // System.out.println(obat.getString("brand"));
+                    }
+                } catch (Exception e) {
+                System.out.println(e);
+                }
+                break;
+            case "Kosmetik":
+                ResultSet kosmetik = Kosmetik.searchByName(search);
+                try {
+                    while (kosmetik.next()) {
+                    // System.out.println(kosmetik.getString("name"));
+                    // System.out.println(kosmetik.getString("brand"));
+                    }
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+                break;
+            case "Alat Kesehatan":
+                ResultSet alat = AlatKesehatan.searchByName(search);
+                try {
+                    while (alat.next()) {
+                    // System.out.println(alat.getString("name"));
+                    // System.out.println(alat.getString("brand"));
+                    }
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+                break;
+            case "Suplemen":
+                ResultSet supplement = Suplemen.searchByName(search);
+                try {
+                    while (supplement.next()) {
+                    // System.out.println(supplement.getString("name"));
+                    // System.out.println(supplement.getString("brand"));
+                    }
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+                break;
+            default:
+                break;
+        }
+    }                                      
 
 
     public static void main(String args[]) {
