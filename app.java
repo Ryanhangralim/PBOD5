@@ -12,16 +12,18 @@
 // import view.tambahCosmetik;
 // import view.tambahObat;
 // import view.tambahSupplement;
+import java.sql.ResultSet;
+
+import models.Obat;
 import view.mainpage;
 // import models.Cart;
 // import models.CartItem;
 // import models.Kosmetik;
 // import models.ManagerInventori;
-// import models.Obat;
+// import models.Obat;3
 // import models.Supplier;
 // import view.Inventaris;
 // import view.Login;
-
 
 public class app {
   public static void main(String[] args) {
@@ -121,11 +123,23 @@ public class app {
     // // Print cart item
     // List<CartItem> cartItemList = Cart.seeCart();
     // for (CartItem cartItem : cartItemList) {
-    //   System.out.println(cartItem.getName());
-    //   System.out.println(cartItem.getQty());
-    //   System.out.println(cartItem.getTotal());
+    // System.out.println(cartItem.getName());
+    // System.out.println(cartItem.getQty());
+    // System.out.println(cartItem.getTotal());
 
-    mainpage Mainpage = new mainpage();
-    Mainpage.setVisible(true);
+    ResultSet obat = Obat.searchByName("para");
+
+    try {
+      while (obat.next()) {
+        System.out.println(obat.getString("name"));
+        System.out.println(obat.getString("brand"));
+      }
+    } catch (Exception e) {
+      // TODO: handle exception
+      System.out.println(e);
+    }
+
+    // mainpage Mainpage = new mainpage();
+    // Mainpage.setVisible(true);
   }
 }

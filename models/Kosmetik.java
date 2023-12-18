@@ -147,4 +147,20 @@ public class Kosmetik extends Produk {
       System.out.println("Failed to update cosmetic stock" + e);
     }
   }
+
+  public static ResultSet searchByName(String name) {
+    try {
+      Connection conn = MySQLConn.getConnection();
+      String sql = "SELECT * FROM cosmetic WHERE name LIKE ?";
+      PreparedStatement search = conn.prepareStatement(sql);
+
+      String nama = "%" + name + "%";
+      search.setString(1, nama);
+      ResultSet cosmetic = search.executeQuery();
+      return cosmetic;
+    } catch (Exception e) {
+      System.out.println("Failed to search for cosmetic: " + e);
+      return null;
+    }
+  }
 }

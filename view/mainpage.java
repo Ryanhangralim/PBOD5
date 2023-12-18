@@ -3,14 +3,21 @@ package view;
 import javax.swing.AbstractCellEditor;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.TableCellRenderer;
+
+import config.MySQLConn;
+
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +28,7 @@ public class mainpage extends javax.swing.JFrame {
      */
     public mainpage() {
         initComponents();
-
+        refresh();
     }
 
     /**
@@ -80,7 +87,7 @@ public class mainpage extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Nama", "Merek", "Produsen", "Tanggal Produksi", "Harga", "Stok", ""
+                "id", "Nama", "Merek", "Produsen", "Tanggal Produksi", "Harga", "Stok", ""
             }
         ) {
             Class[] types = new Class [] {
@@ -112,8 +119,8 @@ public class mainpage extends javax.swing.JFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 String selectedOption = jComboBox1.getSelectedItem().toString();
                 if (selectedOption.equals("Log Out")) {
-                    Login login = new Login();
-                    login.setVisible(true);
+                        Login login = new Login();
+                        login.setVisible(true);
                     dispose();
                 }
             }
@@ -156,7 +163,6 @@ public class mainpage extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-
 
         //nambah ke tabel
         addRowToJTable();
@@ -208,49 +214,88 @@ public class mainpage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>    
 
-    private String selectedCategory = null; // Store the selected category                                          
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {    
-        refresh();
-    }
-    
-    private void refresh() {
-        tableData.clear();
-        switch (selectedCategory) {
-            case "Obat":
-                addDataForCategory("Obat", 100);
-                break;
-            case "Kosmetik":
-                addDataForCategory("Kosmetik", 100);
-                break;
-            case "Alat Kesehatan":
-                addDataForCategory("Alat Kesehatan", 100);
-                break;
-            case "Suplemen":
-                addDataForCategory("Suplemen", 100);
-                break;
-            default:
-                break;
-        }
-        addRowToJTable();
-    } 
-
-    private void addDataForCategory(String category, int rowCount) {
-        for (int i = 0; i < rowCount; i++) {
-            List<Object> rowData = new ArrayList<>();
-            addRow(category, rowData);
-            tableData.add(rowData);
-        }
-    }
+    private String selectedCategory = null;                                        
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {
         selectedCategory = jComboBox2.getSelectedItem().toString();
         refresh();
     }
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {    
+        refresh();
+    }
+
     private List<List<Object>> tableData = new ArrayList<>();
 
+    private void addDataForCategory(String category) {
+        try (Connection conn = MySQLConn.getConnection()) {
+            String query = "SELECT id, name, brand, pharma, production_date, price, stock FROM " + category.toLowerCase();
+            try (PreparedStatement ps = conn.prepareStatement(query); ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    List<Object> rowData = new ArrayList<>();
+                    int id = rs.getInt("id");
+                    String name = rs.getString("name");
+                    String brand = rs.getString("brand");
+                    String pharma = rs.getString("pharma");
+                    String date = rs.getString("production_date");
+                    int price = rs.getInt("price");
+                    int stock = rs.getInt("stock");
+    
+                    rowData.add(id);
+                    rowData.add(name);
+                    rowData.add(brand);
+                    rowData.add(pharma);
+                    rowData.add(date);
+                    rowData.add(price);
+                    rowData.add(stock);
+    
+                    tableData.add(rowData);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error loading data for category " + category + ": " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
     private void addRowToJTable() {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+    
+        for (List<Object> rowData : tableData) {
+            model.addRow(rowData.toArray());
+        }
+    }
+    
+    private void refresh() {
+        tableData.clear();
+        try {
+            if (selectedCategory != null) {
+                switch (selectedCategory) {
+                    case "Obat":
+                        addDataForCategory("medicines");
+                        break;
+                    case "Kosmetik":
+                        addDataForCategory("cosmetic");
+                        break;
+                    case "Alat Kesehatan":
+                        addDataForCategory("medical_equipment");
+                        break;
+                    case "Suplemen":
+                        addDataForCategory("supplements");
+                        break;
+                    default:
+                        break;
+                }
+                refreshTable();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error loading data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void refreshTable() {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
     
@@ -262,7 +307,7 @@ public class mainpage extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
         if (selectedCategory != null) {
             List<Object> rowData = new ArrayList<>();
-    
+
             switch (selectedCategory) {
                 case "Obat":
                     tambahObat obat = new tambahObat(this, true);
@@ -283,33 +328,14 @@ public class mainpage extends javax.swing.JFrame {
                 default:
                     break;
             }
-    
+
             tableData.add(rowData);
 
             refresh();
         }
-    
+
         selectedCategory = jComboBox2.getSelectedItem().toString();
-    }
-    
-    
-    private void addRow(String category, List<Object> rowData) {
-        int id = (int) (Math.random() * 1000);
-        String name = category + "-" + String.format("%02d", id);
-        String brand = "Brand-" + String.format("%02d", id);
-        String manufacturer = "Manufacturer-apa";
-        String date = "01/01/2022";
-        int price = (int) (Math.random() * 100000);
-        int stock = (int) (Math.random() * 100);
-    
-        rowData.add(id);
-        rowData.add(name);
-        rowData.add(brand);
-        rowData.add(manufacturer);
-        rowData.add(date);
-        rowData.add(price);
-        rowData.add(stock);
-    }                                      
+    }                                    
 
     private class ButtonRenderer extends JButton implements TableCellRenderer {
         public ButtonRenderer() {
@@ -416,4 +442,3 @@ public class mainpage extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     // End of variables declaration                   
 }
-

@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import config.MySQLConn;
 
@@ -14,6 +16,22 @@ public class Obat extends Produk {
   private LocalDate tanggal_kadaluwarsa;
   private String efek_samping;
   private String dosis;
+
+  // Constructor
+  // public Obat(int id, String name, String brand, String pharma, LocalDate production_date, int price, int stock,
+  //     String category, LocalDate exp_date, String side_effect, String dose) {
+  //   this.set_id(id);
+  //   this.set_nama(name);
+  //   this.set_merek(brand);
+  //   this.set_produsen(pharma);
+  //   this.set_tanggalproduksi(production_date);
+  //   this.set_stok(stock);
+  //   this.set_harga(price);
+  //   this.jenis = category;
+  //   this.tanggal_kadaluwarsa = exp_date;
+  //   this.efek_samping = side_effect;
+  //   this.dosis = dose;
+  // }
 
   public void set_jenis(String jenis) {
     this.jenis = jenis;
@@ -157,6 +175,23 @@ public class Obat extends Produk {
     } catch (Exception e) {
       // TODO: handle exception
       System.out.println("Failed to update medicine stock" + e);
+    }
+  }
+
+  public static ResultSet searchByName(String name) {
+    try {
+      Connection conn = MySQLConn.getConnection();
+      String sql = "SELECT * FROM medicines WHERE name LIKE ?";
+      PreparedStatement searchMedicine = conn.prepareStatement(sql);
+
+      String nama = "%" + name + "%";
+      System.out.println(nama);
+      searchMedicine.setString(1, nama);
+      ResultSet medicine = searchMedicine.executeQuery();
+      return medicine;
+    } catch (Exception e) {
+      System.out.println("Failed to search for medicine: " + e);
+      return null;
     }
   }
 }
