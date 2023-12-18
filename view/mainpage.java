@@ -423,7 +423,8 @@ public class mainpage extends javax.swing.JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e){
-            int idProduk = (int) jTable1.getValueAt(row, 0);
+            int idProduk = Integer.parseInt( (String) jTable1.getValueAt(row, 0));
+            selectedCategory = jComboBox2.getSelectedItem().toString();
             switch (selectedCategory) {
                 case "Obat":
                     detailObat detailObat = new detailObat(parentFrame, true, idProduk);
@@ -452,14 +453,23 @@ public class mainpage extends javax.swing.JFrame {
 
     //Search Button
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        String search = jTextField1.getText();
+        String search = (String) jTextField1.getText();
+        selectedCategory = jComboBox2.getSelectedItem().toString();
+        tableData.clear();
         switch (selectedCategory) {
             case "Obat":
                 ResultSet obat = Obat.searchByName(search);
                 try {
                     while (obat.next()) {
-                    // obat.getString("name");
-                    // System.out.println(obat.getString("brand"));
+                        List<Object> rowData = new ArrayList<>();
+                        rowData.add(obat.getString("ID"));
+                        rowData.add(obat.getString("name"));
+                        rowData.add(obat.getString("brand"));
+                        rowData.add(obat.getString("pharma"));
+                        rowData.add(obat.getString("production_date"));
+                        rowData.add(obat.getString("price"));
+                        rowData.add(obat.getString("stock"));
+                        tableData.add(rowData);
                     }
                 } catch (Exception e) {
                 System.out.println(e);
@@ -469,38 +479,60 @@ public class mainpage extends javax.swing.JFrame {
                 ResultSet kosmetik = Kosmetik.searchByName(search);
                 try {
                     while (kosmetik.next()) {
-                    // System.out.println(kosmetik.getString("name"));
-                    // System.out.println(kosmetik.getString("brand"));
+                        List<Object> rowData = new ArrayList<>();
+                        rowData.add(kosmetik.getString("id"));
+                        rowData.add(kosmetik.getString("name"));
+                        rowData.add(kosmetik.getString("brand"));
+                        rowData.add(kosmetik.getString("pharma"));
+                        rowData.add(kosmetik.getString("production_date"));
+                        rowData.add(kosmetik.getString("price"));
+                        rowData.add(kosmetik.getString("stock"));
+                        tableData.add(rowData);
                     }
                 } catch (Exception e) {
-                    System.out.println(e);
+                System.out.println(e);
                 }
                 break;
             case "Alat Kesehatan":
-                ResultSet alat = AlatKesehatan.searchByName(search);
+                ResultSet alatKesehatan = AlatKesehatan.searchByName(search);
                 try {
-                    while (alat.next()) {
-                    // System.out.println(alat.getString("name"));
-                    // System.out.println(alat.getString("brand"));
+                    while (alatKesehatan.next()) {
+                        List<Object> rowData = new ArrayList<>();
+                        rowData.add(alatKesehatan.getString("id"));
+                        rowData.add(alatKesehatan.getString("name"));
+                        rowData.add(alatKesehatan.getString("brand"));
+                        rowData.add(alatKesehatan.getString("pharma"));
+                        rowData.add(alatKesehatan.getString("production_date"));
+                        rowData.add(alatKesehatan.getString("price"));
+                        rowData.add(alatKesehatan.getString("stock"));
+                        tableData.add(rowData);
                     }
                 } catch (Exception e) {
-                    System.out.println(e);
+                System.out.println(e);
                 }
                 break;
             case "Suplemen":
-                ResultSet supplement = Suplemen.searchByName(search);
+                ResultSet suplemen = Suplemen.searchByName(search);
                 try {
-                    while (supplement.next()) {
-                    // System.out.println(supplement.getString("name"));
-                    // System.out.println(supplement.getString("brand"));
+                    while (suplemen.next()) {
+                        List<Object> rowData = new ArrayList<>();
+                        rowData.add(suplemen.getString("id"));
+                        rowData.add(suplemen.getString("name"));
+                        rowData.add(suplemen.getString("brand"));
+                        rowData.add(suplemen.getString("pharma"));
+                        rowData.add(suplemen.getString("production_date"));
+                        rowData.add(suplemen.getString("price"));
+                        rowData.add(suplemen.getString("stock"));
+                        tableData.add(rowData);
                     }
                 } catch (Exception e) {
-                    System.out.println(e);
+                System.out.println(e);
                 }
                 break;
             default:
                 break;
         }
+        addRowToJTable();
     }                                      
 
 
