@@ -19,9 +19,10 @@ public class mainpage extends javax.swing.JFrame {
     /**
      * Creates new form mainpage
      */
+    java.awt.Frame parentFrame = this;
+
     public mainpage() {
         initComponents();
-
     }
 
     /**
@@ -362,9 +363,29 @@ public class mainpage extends javax.swing.JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("Button clicked in row: " + row);
-            // TULIS DISINI KALAU MAU NGEHANDLE ACTION BUTTON
-            fireEditingStopped(); // Notify that editing has stopped
+            int idProduk = (int) jTable1.getValueAt(row, 0);
+            switch (selectedCategory) {
+            case "Obat":
+                detailObat detailObat = new detailObat(parentFrame, true, idProduk);
+                detailObat.setVisible(true);
+                break;
+            case "Kosmetik":
+                detailCosmetik detailCosmetik = new detailCosmetik(parentFrame, true, idProduk);
+                detailCosmetik.setVisible(true);
+                break;
+            case "Alat Kesehatan":
+                detailAlat detailAlat = new detailAlat(parentFrame, true, idProduk);
+                detailAlat.setVisible(true);
+                break;
+            case "Suplemen":
+                detailSupplement detailSupplement = new detailSupplement(parentFrame, true, idProduk);
+                detailSupplement.setVisible(true);
+                break;
+            default:
+                break;
+        }
+            // // TULIS DISINI KALAU MAU NGEHANDLE ACTION BUTTON
+            // fireEditingStopped(); // Notify that editing has stopped
         }
     }
     

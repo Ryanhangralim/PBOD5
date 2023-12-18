@@ -1,13 +1,20 @@
 package view;
 
+import java.time.LocalDate;
+
+import models.Kosmetik;
+
 public class editCosmetik extends javax.swing.JDialog {
 
     /**
      * Creates new form tambahObat
      */
-    public editCosmetik(java.awt.Frame parent, boolean modal) {
+
+    int idKosmetik;
+    public editCosmetik(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
-        initComponents();
+        initComponents(id);
+        idKosmetik = id;
     }
 
     /**
@@ -17,7 +24,7 @@ public class editCosmetik extends javax.swing.JDialog {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
-    private void initComponents() {
+    private void initComponents(int id) {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -313,11 +320,28 @@ public class editCosmetik extends javax.swing.JDialog {
     }                                          
 
     private void editButtonMouseClicked(java.awt.event.MouseEvent evt) {                                        
-        // TODO add your handling code here:
+        Kosmetik kosmetikBaru = new Kosmetik();
+        kosmetikBaru.set_id(idKosmetik);
+        if(!(namaField.getText().isEmpty() || brandField.getText().isEmpty() || produsenField.getText().isEmpty() || hargaField.getText().isEmpty() || stockField.getText().isEmpty() || jenisField.getText().isEmpty() || tglProduksiField.getText().isEmpty() || tglExpField.getText().isEmpty() || efekField.getText().isEmpty())){
+            kosmetikBaru.set_nama(namaField.getText());
+            kosmetikBaru.set_merek(brandField.getText());
+            kosmetikBaru.set_produsen(produsenField.getText());
+            kosmetikBaru.set_harga(Integer.parseInt(hargaField.getText()));
+            kosmetikBaru.set_stok(Integer.parseInt(stockField.getText()));
+            kosmetikBaru.set_jeniskosmetik(jenisField.getText());
+            kosmetikBaru.set_tanggalproduksi(LocalDate.parse(tglProduksiField.getText()));
+            kosmetikBaru.set_tanggalkadaluwarsa(LocalDate.parse(tglExpField.getText()));
+            kosmetikBaru.set_beratbersih(Integer.parseInt(efekField.getText()));
+            kosmetikBaru.save();
+            this.dispose();
+        }
+        else{
+            System.out.println("Belum lengkap goblog");
+        }
     }                                       
 
     private void cancelButtonMouseClicked(java.awt.event.MouseEvent evt) {                                          
-        // TODO add your handling code here:
+        this.dispose();
     }                                         
 
     /**
@@ -353,7 +377,7 @@ public class editCosmetik extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                editCosmetik dialog = new editCosmetik(new javax.swing.JFrame(), true);
+                editCosmetik dialog = new editCosmetik(new javax.swing.JFrame(), true, 1);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

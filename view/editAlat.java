@@ -1,13 +1,20 @@
 package view;
 
+import java.time.LocalDate;
+
+import models.AlatKesehatan;
+
 public class editAlat extends javax.swing.JDialog {
 
     /**
      * Creates new form tambahObat
      */
-    public editAlat(java.awt.Frame parent, boolean modal) {
+
+    int idAlat;
+    public editAlat(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
-        initComponents();
+        initComponents(id);
+        idAlat = id;
     }
 
     /**
@@ -17,7 +24,7 @@ public class editAlat extends javax.swing.JDialog {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
-    private void initComponents() {
+    private void initComponents(int id) {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -288,11 +295,27 @@ public class editAlat extends javax.swing.JDialog {
     }                                          
 
     private void editButtonMouseClicked(java.awt.event.MouseEvent evt) {                                        
-        // TODO add your handling code here:
+        AlatKesehatan alat = new AlatKesehatan();
+        alat.set_id(idAlat);
+        if(!(namaField.getText().isEmpty() || brandField.getText().isEmpty() || produsenField.getText().isEmpty() || hargaField.getText().isEmpty() || stockField.getText().isEmpty() || jenisField.getText().isEmpty() || tglProduksiField.getText().isEmpty() || beratField.getText().isEmpty())){
+            alat.set_nama(namaField.getText());
+            alat.set_merek(brandField.getText());
+            alat.set_produsen(produsenField.getText());
+            alat.set_tanggalproduksi(LocalDate.parse(tglProduksiField.getText()));
+            alat.set_harga(Integer.parseInt(hargaField.getText()));
+            alat.set_stok(Integer.parseInt(hargaField.getText()));
+            alat.set_jenisalat(jenisField.getText());
+            alat.set_berat(Integer.parseInt(beratField.getText()));
+            alat.save();
+            this.dispose();
+        }
+        else{
+            System.out.println("Belum lengkap goblog");
+        }
     }                                       
 
     private void cancelButtonMouseClicked(java.awt.event.MouseEvent evt) {                                          
-        // TODO add your handling code here:
+        this.dispose();
     }                                         
 
     /**
@@ -328,7 +351,7 @@ public class editAlat extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                editAlat dialog = new editAlat(new javax.swing.JFrame(), true);
+                editAlat dialog = new editAlat(new javax.swing.JFrame(), true, 1);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

@@ -1,13 +1,20 @@
 package view;
 
+import java.sql.ResultSet;
+
+import models.AlatKesehatan;
+import models.Obat;
+
 public class detailAlat extends javax.swing.JDialog {
 
     /**
      * Creates new form tambahObat
      */
+    java.awt.Frame parentFrame;
     public detailAlat(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
         initComponents(id);
+        parentFrame = parent;
     }
 
     /**
@@ -18,6 +25,8 @@ public class detailAlat extends javax.swing.JDialog {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents(int id) {
+
+        ResultSet hasilAlat = AlatKesehatan.getByID(id);
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -42,6 +51,24 @@ public class detailAlat extends javax.swing.JDialog {
         editButton = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         idField = new javax.swing.JTextField();
+
+        if (hasilAlat != null) {
+            try {
+                while (hasilAlat.next()) {
+                    idField.setText(Integer.toString(hasilAlat.getInt("id")));
+                    namaField.setText(hasilAlat.getString("name"));
+                    brandField.setText(hasilAlat.getString("brand"));
+                    produsenField.setText(hasilAlat.getString("pharma"));
+                    hargaField.setText(Integer.toString(hasilAlat.getInt("price")));
+                    stockField.setText(Integer.toString(hasilAlat.getInt("stock")));
+                    jenisField.setText(hasilAlat.getString("category"));
+                    tglProduksiField.setText(hasilAlat.getString("production_date"));
+                    beratField.setText(Integer.toString(hasilAlat.getInt("weight")));
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -313,11 +340,16 @@ public class detailAlat extends javax.swing.JDialog {
     }                                          
 
     private void editButtonMouseClicked(java.awt.event.MouseEvent evt) {                                        
-        // TODO add your handling code here:
+        this.dispose();
+        int id = Integer.parseInt(idField.getText());  
+        editAlat dialog = new editAlat(parentFrame, true, id);
+        dialog.setVisible(true);
     }                                       
 
     private void hapusButtonMouseClicked(java.awt.event.MouseEvent evt) {                                         
-        // TODO add your handling code here:
+        int id = Integer.parseInt(idField.getText());
+        AlatKesehatan.delete(id);                                     
+        this.dispose();
     }                                        
 
     private void idFieldActionPerformed(java.awt.event.ActionEvent evt) {                                        
@@ -361,7 +393,7 @@ public class detailAlat extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                detailAlat dialog = new detailAlat(new javax.swing.JFrame(), true);
+                detailAlat dialog = new detailAlat(new javax.swing.JFrame(), true, 1);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
