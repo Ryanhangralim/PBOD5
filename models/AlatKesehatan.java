@@ -52,7 +52,7 @@ public class AlatKesehatan extends Produk {
       }
       // Update kalau obat sudah ada
       else {
-        String sql = "UPDATE medical_equipments(name, brand, pharma, production_date, price, stock, category, weight) VALUES(?, ?, ?, ?, ?, ?, ?, ?) WHERE ID = ?";
+        String sql = "UPDATE medical_equipments SET name = ?, brand = ?, pharma = ?, production_date = ?, price = ?, stock = ?, category = ?, weight = ? WHERE ID = ?";
         PreparedStatement updateEquipment = conn.prepareStatement(sql);
 
         updateEquipment.setString(1, this.get_nama());
@@ -63,6 +63,7 @@ public class AlatKesehatan extends Produk {
         updateEquipment.setInt(6, this.get_stok());
         updateEquipment.setString(7, this.get_jenisalat());
         updateEquipment.setInt(8, this.get_berat());
+        updateEquipment.setInt(9, this.get_id());
 
         newEquipment = updateEquipment.executeUpdate();
       }
@@ -133,22 +134,6 @@ public class AlatKesehatan extends Produk {
     } catch (Exception e) {
       // TODO: handle exception
       System.out.println("Failed to update medical equipment stock" + e);
-    }
-  }
-
-  public static ResultSet searchByName(String name) {
-    try {
-      Connection conn = MySQLConn.getConnection();
-      String sql = "SELECT * FROM medical_eqipments WHERE name LIKE ?";
-      PreparedStatement search = conn.prepareStatement(sql);
-
-      String nama = "%" + name + "%";
-      search.setString(1, nama);
-      ResultSet medeq = search.executeQuery();
-      return medeq;
-    } catch (Exception e) {
-      System.out.println("Failed to search for medeq: " + e);
-      return null;
     }
   }
 }
