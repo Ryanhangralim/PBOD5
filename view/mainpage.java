@@ -8,14 +8,11 @@ import javax.swing.JTextField;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 
 public class mainpage extends javax.swing.JFrame {
 
@@ -223,16 +220,16 @@ public class mainpage extends javax.swing.JFrame {
         // Generate data based on the selected category
         switch (selectedCategory) {
             case "Obat":
-                addDataForCategory("Obat", 5);
+                addDataForCategory("Obat", 100);
                 break;
             case "Kosmetik":
-                addDataForCategory("Kosmetik", 5);
+                addDataForCategory("Kosmetik", 100);
                 break;
             case "Alat Kesehatan":
-                addDataForCategory("Alat Kesehatan", 5);
+                addDataForCategory("Alat Kesehatan", 100);
                 break;
             case "Suplemen":
-                addDataForCategory("Suplemen", 5);
+                addDataForCategory("Suplemen", 100);
                 break;
             default:
                 break;
@@ -251,7 +248,6 @@ public class mainpage extends javax.swing.JFrame {
     }
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {
-        // Store the selected category when the combo box selection changes
         selectedCategory = jComboBox2.getSelectedItem().toString();
         refresh();
     }
@@ -260,7 +256,7 @@ public class mainpage extends javax.swing.JFrame {
 
     private void addRowToJTable() {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.setRowCount(0); // Clear existing rows
+        model.setRowCount(0);
     
         for (List<Object> rowData : tableData) {
             model.addRow(rowData.toArray());
@@ -268,7 +264,6 @@ public class mainpage extends javax.swing.JFrame {
     }
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
-        // Handle the "Tambah Produk" button click
         if (selectedCategory != null) {
             List<Object> rowData = new ArrayList<>();
     
@@ -303,7 +298,6 @@ public class mainpage extends javax.swing.JFrame {
     
     
     private void addRow(String category, List<Object> rowData) {
-        // Generate random values for demonstration purposes
         int id = (int) (Math.random() * 1000);
         String name = category + "-" + String.format("%02d", id);
         String brand = "Brand-" + String.format("%02d", id);
@@ -347,9 +341,19 @@ public class mainpage extends javax.swing.JFrame {
 
         @Override
         public Object getCellEditorValue() {
-            return null; // Since the button value is not needed
+            return null; 
         }
 
+        /**
+         * Mengembalikan komponen editor sel untuk tabel.
+         * 
+         * @param table Tabel yang sedang diedit
+         * @param value Nilai dari sel yang sedang diedit
+         * @param isSelected Menandakan apakah sel sedang dipilih
+         * @param row Indeks baris dari sel yang sedang diedit
+         * @param column Indeks kolom dari sel yang sedang diedit
+         * @return Komponen editor sel untuk tabel
+         */
         @Override
         public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
             this.row = row;
@@ -358,15 +362,14 @@ public class mainpage extends javax.swing.JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            // Handle button click here
             System.out.println("Button clicked in row: " + row);
-            // Add your logic here based on the selected row
+            // TULIS DISINI KALAU MAU NGEHANDLE ACTION BUTTON
             fireEditingStopped(); // Notify that editing has stopped
         }
     }
     
 
-
+    //Search Button
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
     }                                        
