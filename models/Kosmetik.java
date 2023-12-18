@@ -63,7 +63,7 @@ public class Kosmetik extends Produk {
       }
       // Update kalau obat sudah ada
       else {
-        String sql = "UPDATE cosmetic(name, brand, pharma, production_date, price, stock, expired_date, cosmetic_type, weight) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)  WHERE ID = ?";
+        String sql = "UPDATE cosmetic SET name = ?, brand = ?, pharma = ?, production_date = ?, price = ?, stock = ?, expired_date = ?, cosmetic_type = ?, weight = ? WHERE ID = ?";
         PreparedStatement insertnewCosmetic = conn.prepareStatement(sql);
 
         insertnewCosmetic.setString(1, this.get_nama());
@@ -75,6 +75,8 @@ public class Kosmetik extends Produk {
         insertnewCosmetic.setDate(7, Date.valueOf(this.get_tanggalkadaluwarsa()));
         insertnewCosmetic.setString(8, this.get_jeniskosmetik());
         insertnewCosmetic.setInt(9, this.get_beratbersih());
+        insertnewCosmetic.setInt(10, this.get_id());
+
 
         newCosmetic = insertnewCosmetic.executeUpdate();
       }
