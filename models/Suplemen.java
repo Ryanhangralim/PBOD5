@@ -73,7 +73,7 @@ public class Suplemen extends Produk {
       }
       // Update kalau obat sudah ada
       else {
-        String sql = "UPDATE supplements(name, brand, pharma, production_date, price, stock, category, expired_date, dose, category, nutrition) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?) WHERE ID = ?";
+        String sql = "UPDATE supplements SET name = ?, brand = ?, pharma = ?, production_date = ?, price = ?, stock = ?, expired_date = ?, dose = ?, category = ?, nutrition = ? WHERE ID = ?";
         PreparedStatement updateSupplement = conn.prepareStatement(sql);
 
         updateSupplement.setString(1, this.get_nama());
@@ -86,6 +86,7 @@ public class Suplemen extends Produk {
         updateSupplement.setString(8, this.get_dosis());
         updateSupplement.setString(9, this.get_jenissuplemen());
         updateSupplement.setString(10, this.get_informasinutrisi());
+        updateSupplement.setInt(11, this.get_id());
 
         newSupplement = updateSupplement.executeUpdate();
       }
