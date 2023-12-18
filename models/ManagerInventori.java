@@ -104,7 +104,7 @@ public class ManagerInventori {
       }
       // Update kalau manager sudah ada
       else {
-        String sql = "UPDATE INTO inventory_managers(username, password, name, telephone_number, address) VALUES(?, ?, ?, ?, ?) WHERE ID = ?";
+        String sql = "UPDATE inventory_managers SET username = ?, password = ?, name = ?, telephone_number = ?, address = ? WHERE ID = ?";
         PreparedStatement updateManager = conn.prepareStatement(sql);
 
         updateManager.setString(1, get_username());
@@ -112,6 +112,7 @@ public class ManagerInventori {
         updateManager.setString(3, get_nama());
         updateManager.setString(4, get_nomortelepon());
         updateManager.setString(5, get_alamat());
+        updateManager.setInt(6, get_id());
 
         newManager = updateManager.executeUpdate();
       }
