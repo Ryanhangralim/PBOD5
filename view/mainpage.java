@@ -216,7 +216,12 @@ public class mainpage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>    
 
-    private String selectedCategory = null; // Store the selected category                                          
+    private String selectedCategory = null; // Store the selected category
+    
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {
+        selectedCategory = jComboBox2.getSelectedItem().toString();
+        refresh();
+    }
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {    
         refresh();
@@ -248,16 +253,83 @@ public class mainpage extends javax.swing.JFrame {
     } 
 
     private void addDataForCategory(String category, int rowCount) {
-        for (int i = 0; i < rowCount; i++) {
-            List<Object> rowData = new ArrayList<>();
-            addRow(category, rowData);
-            tableData.add(rowData);
+        selectedCategory = category;
+        switch (selectedCategory) {
+            case "Obat":
+                ResultSet obat = Obat.getAll();
+                try {
+                    while (obat.next()) {
+                        List<Object> rowData = new ArrayList<>();
+                        rowData.add(obat.getString("ID"));
+                        rowData.add(obat.getString("name"));
+                        rowData.add(obat.getString("brand"));
+                        rowData.add(obat.getString("pharma"));
+                        rowData.add(obat.getString("production_date"));
+                        rowData.add(obat.getString("price"));
+                        rowData.add(obat.getString("stock"));
+                        tableData.add(rowData);
+                    }
+                } catch (Exception e) {
+                System.out.println(e);
+                }
+                break;
+            case "Kosmetik":
+                ResultSet kosmetik = Kosmetik.getAll();
+                try {
+                    while (kosmetik.next()) {
+                        List<Object> rowData = new ArrayList<>();
+                        rowData.add(kosmetik.getString("id"));
+                        rowData.add(kosmetik.getString("name"));
+                        rowData.add(kosmetik.getString("brand"));
+                        rowData.add(kosmetik.getString("pharma"));
+                        rowData.add(kosmetik.getString("production_date"));
+                        rowData.add(kosmetik.getString("price"));
+                        rowData.add(kosmetik.getString("stock"));
+                        tableData.add(rowData);
+                    }
+                } catch (Exception e) {
+                System.out.println(e);
+                }
+                break;
+            case "Alat Kesehatan":
+                ResultSet alatKesehatan = AlatKesehatan.getAll();
+                try {
+                    while (alatKesehatan.next()) {
+                        List<Object> rowData = new ArrayList<>();
+                        rowData.add(alatKesehatan.getString("id"));
+                        rowData.add(alatKesehatan.getString("name"));
+                        rowData.add(alatKesehatan.getString("brand"));
+                        rowData.add(alatKesehatan.getString("pharma"));
+                        rowData.add(alatKesehatan.getString("production_date"));
+                        rowData.add(alatKesehatan.getString("price"));
+                        rowData.add(alatKesehatan.getString("stock"));
+                        tableData.add(rowData);
+                    }
+                } catch (Exception e) {
+                System.out.println(e);
+                }
+                break;
+            case "Suplemen":
+                ResultSet suplemen = Suplemen.getAll();
+                try {
+                    while (suplemen.next()) {
+                        List<Object> rowData = new ArrayList<>();
+                        rowData.add(suplemen.getString("id"));
+                        rowData.add(suplemen.getString("name"));
+                        rowData.add(suplemen.getString("brand"));
+                        rowData.add(suplemen.getString("pharma"));
+                        rowData.add(suplemen.getString("production_date"));
+                        rowData.add(suplemen.getString("price"));
+                        rowData.add(suplemen.getString("stock"));
+                        tableData.add(rowData);
+                    }
+                } catch (Exception e) {
+                System.out.println(e);
+                }
+                break;
+            default:
+                break;
         }
-    }
-
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {
-        selectedCategory = jComboBox2.getSelectedItem().toString();
-        refresh();
     }
 
     private List<List<Object>> tableData = new ArrayList<>();
@@ -303,25 +375,6 @@ public class mainpage extends javax.swing.JFrame {
     
         selectedCategory = jComboBox2.getSelectedItem().toString();
     }
-    
-    
-    private void addRow(String category, List<Object> rowData) {
-        int id = (int) (Math.random() * 1000);
-        String name = category + "-" + String.format("%02d", id);
-        String brand = "Brand-" + String.format("%02d", id);
-        String manufacturer = "Manufacturer-" + String.format("%02d", id);
-        String date = "01/01/2022";
-        int price = (int) (Math.random() * 100000);
-        int stock = (int) (Math.random() * 100);
-    
-        rowData.add(id);
-        rowData.add(name);
-        rowData.add(brand);
-        rowData.add(manufacturer);
-        rowData.add(date);
-        rowData.add(price);
-        rowData.add(stock);
-    }                                      
 
     private class ButtonRenderer extends JButton implements TableCellRenderer {
         public ButtonRenderer() {
@@ -369,28 +422,28 @@ public class mainpage extends javax.swing.JFrame {
         }
 
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(ActionEvent e){
             int idProduk = (int) jTable1.getValueAt(row, 0);
             switch (selectedCategory) {
-            case "Obat":
-                detailObat detailObat = new detailObat(parentFrame, true, idProduk);
-                detailObat.setVisible(true);
-                break;
-            case "Kosmetik":
-                detailCosmetik detailCosmetik = new detailCosmetik(parentFrame, true, idProduk);
-                detailCosmetik.setVisible(true);
-                break;
-            case "Alat Kesehatan":
-                detailAlat detailAlat = new detailAlat(parentFrame, true, idProduk);
-                detailAlat.setVisible(true);
-                break;
-            case "Suplemen":
-                detailSupplement detailSupplement = new detailSupplement(parentFrame, true, idProduk);
-                detailSupplement.setVisible(true);
-                break;
-            default:
-                break;
-        }
+                case "Obat":
+                    detailObat detailObat = new detailObat(parentFrame, true, idProduk);
+                    detailObat.setVisible(true);
+                    break;
+                case "Kosmetik":
+                    detailCosmetik detailCosmetik = new detailCosmetik(parentFrame, true, idProduk);
+                    detailCosmetik.setVisible(true);
+                    break;
+                case "Alat Kesehatan":
+                    detailAlat detailAlat = new detailAlat(parentFrame, true, idProduk);
+                    detailAlat.setVisible(true);
+                    break;
+                case "Suplemen":
+                    detailSupplement detailSupplement = new detailSupplement(parentFrame, true, idProduk);
+                    detailSupplement.setVisible(true);
+                    break;
+                default:
+                    break;
+            }
             // // TULIS DISINI KALAU MAU NGEHANDLE ACTION BUTTON
             // fireEditingStopped(); // Notify that editing has stopped
         }
@@ -405,7 +458,7 @@ public class mainpage extends javax.swing.JFrame {
                 ResultSet obat = Obat.searchByName(search);
                 try {
                     while (obat.next()) {
-                    // System.out.println(obat.getString("name"));
+                    // obat.getString("name");
                     // System.out.println(obat.getString("brand"));
                     }
                 } catch (Exception e) {
