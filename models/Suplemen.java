@@ -155,7 +155,23 @@ public class Suplemen extends Produk {
 
     } catch (Exception e) {
       // TODO: handle exception
-      System.out.println("Failed to update supplement stock" + e);
+      System.out.println("Failed to search name" + e);
+    }
+  }
+
+  public static ResultSet searchByName(String name) {
+    try {
+      Connection conn = MySQLConn.getConnection();
+      String sql = "SELECT * FROM supplements WHERE name LIKE ?";
+      PreparedStatement search = conn.prepareStatement(sql);
+
+      String nama = "%" + name + "%";
+      search.setString(1, nama);
+      ResultSet supplement = search.executeQuery();
+      return supplement;
+    } catch (Exception e) {
+      System.out.println("Failed to search for medicine: " + e);
+      return null;
     }
   }
 }
