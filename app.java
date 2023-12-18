@@ -10,7 +10,7 @@
 // import view.Login;
 // import view.tambahAlat;
 // import view.tambahCosmetik;
-// import view.tambahObat;
+import view.tambahObat;
 // import view.tambahSupplement;
 import java.sql.ResultSet;
 
@@ -20,10 +20,11 @@ import view.mainpage;
 // import models.CartItem;
 // import models.Kosmetik;
 // import models.ManagerInventori;
-// import models.Obat;3
+// import models.Obat;
 // import models.Supplier;
 // import view.Inventaris;
 // import view.Login;
+// import view.tambahObat;
 
 public class app {
   public static void main(String[] args) {
@@ -127,17 +128,20 @@ public class app {
     // System.out.println(cartItem.getQty());
     // System.out.println(cartItem.getTotal());
 
-    ResultSet obat = Obat.searchByName("para");
+    // ResultSet obat = Obat.searchByName("para");
 
-    try {
-      while (obat.next()) {
-        System.out.println(obat.getString("name"));
-        System.out.println(obat.getString("brand"));
-      }
-    } catch (Exception e) {
-      // TODO: handle exception
-      System.out.println(e);
-    }
+    // try {
+    //   while (obat.next()) {
+    //     System.out.println(obat.getString("name"));
+    //     System.out.println(obat.getString("brand"));
+    //   }
+    // } catch (Exception e) {
+    //   // TODO: handle exception
+    //   System.out.println(e);
+    // }
+
+    tambahObat obat = new tambahObat(null, false);
+    obat.setVisible(true);
 
     // mainpage Mainpage = new mainpage();
     // Mainpage.setVisible(true);
