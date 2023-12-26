@@ -11,44 +11,54 @@ import java.util.List;
 
 import config.MySQLConn;
 
+// class obat inheritance produk
 public class Obat extends Produk {
   private String jenis;
   private LocalDate tanggal_kadaluwarsa;
   private String efek_samping;
   private String dosis;
   
+  //setter
   public void set_jenis(String jenis) {
     this.jenis = jenis;
   }
 
+  //getter
   public String get_jenis() {
     return this.jenis;
   }
 
+  //setter
   public void set_tanggalkadaluwarsa(LocalDate tanggal_kadaluwarsa) {
     this.tanggal_kadaluwarsa = tanggal_kadaluwarsa;
   }
 
+  //getter
   public LocalDate get_tanggalkadaluwarsa() {
     return this.tanggal_kadaluwarsa;
   }
 
+  //setter
   public void set_efeksamping(String efek_samping) {
     this.efek_samping = efek_samping;
   }
 
+  //getter
   public String get_efeksamping() {
     return this.efek_samping;
   }
 
+  //setter
   public void set_dosis(String dosis) {
     this.dosis = dosis;
   }
 
+  //getter
   public String get_dosis() {
     return this.dosis;
   }
 
+  //method untuk menambah dan mengupdate database
   public int save() {
     int newMedicine = 0;
 
@@ -99,6 +109,7 @@ public class Obat extends Produk {
     return newMedicine;
   }
 
+  //method untuk hapus berdasarkan id
   public static void delete(int ID) {
     try {
       Connection conn = MySQLConn.getConnection();
@@ -113,6 +124,7 @@ public class Obat extends Produk {
     }
   }
 
+  //method untuk mendapatkan isi database
   public static ResultSet getAll() {
     try {
       Connection conn = MySQLConn.getConnection();
@@ -128,6 +140,7 @@ public class Obat extends Produk {
     }
   }
 
+  //method untuk mendapatkan row berdasarkan id
   public static ResultSet getByID(int ID) {
     try {
       Connection conn = MySQLConn.getConnection();
@@ -144,6 +157,7 @@ public class Obat extends Produk {
     }
   }
 
+  //method untuk mengupdate stock dalam database
   public static void updateStock(int id, int qty) {
     // Get MySQL connection
     Connection conn = MySQLConn.getConnection();
