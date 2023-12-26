@@ -145,4 +145,20 @@ public class AlatKesehatan extends Produk {
       System.out.println("Failed to update medical equipment stock" + e);
     }
   }
+
+  public static ResultSet searchByName(String name) {
+    try {
+      Connection conn = MySQLConn.getConnection();
+      String sql = "SELECT * FROM medical_eqipments WHERE name LIKE ?";
+      PreparedStatement search = conn.prepareStatement(sql);
+
+      String nama = "%" + name + "%";
+      search.setString(1, nama);
+      ResultSet medeq = search.executeQuery();
+      return medeq;
+    } catch (Exception e) {
+      System.out.println("Failed to search for medeq: " + e);
+      return null;
+    }
+  }
 }

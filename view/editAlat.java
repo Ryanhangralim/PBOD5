@@ -1,5 +1,6 @@
 package view;
 
+import java.sql.ResultSet;
 import java.time.LocalDate;
 
 import javax.swing.JOptionPane;
@@ -28,6 +29,8 @@ public class editAlat extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents(int id) {
 
+        ResultSet hasilAlat = AlatKesehatan.getByID(id);
+
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -49,6 +52,23 @@ public class editAlat extends javax.swing.JDialog {
         jLabel15 = new javax.swing.JLabel();
         cancelButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
+
+        if (hasilAlat != null) {
+            try {
+                while (hasilAlat.next()) {
+                    namaField.setText(hasilAlat.getString("name"));
+                    brandField.setText(hasilAlat.getString("brand"));
+                    produsenField.setText(hasilAlat.getString("pharma"));
+                    hargaField.setText(Integer.toString(hasilAlat.getInt("price")));
+                    stockField.setText(Integer.toString(hasilAlat.getInt("stock")));
+                    jenisField.setText(hasilAlat.getString("category"));
+                    tglProduksiField.setText(hasilAlat.getString("production_date"));
+                    beratField.setText(Integer.toString(hasilAlat.getInt("weight")));
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 

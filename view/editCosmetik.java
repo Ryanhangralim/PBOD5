@@ -1,10 +1,12 @@
 package view;
 
+import java.sql.ResultSet;
 import java.time.LocalDate;
 
 import javax.swing.JOptionPane;
 
 import models.Kosmetik;
+import models.Obat;
 
 public class editCosmetik extends javax.swing.JDialog {
 
@@ -27,6 +29,8 @@ public class editCosmetik extends javax.swing.JDialog {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents(int id) {
+
+        ResultSet hasilKosmetik = Kosmetik.getByID(id);
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -51,6 +55,24 @@ public class editCosmetik extends javax.swing.JDialog {
         jLabel16 = new javax.swing.JLabel();
         cancelButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
+
+        if (hasilKosmetik != null) {
+            try {
+                while (hasilKosmetik.next()) {
+                    namaField.setText(hasilKosmetik.getString("name"));
+                    brandField.setText(hasilKosmetik.getString("brand"));
+                    produsenField.setText(hasilKosmetik.getString("pharma"));
+                    hargaField.setText(hasilKosmetik.getString("price"));
+                    stockField.setText(hasilKosmetik.getString("stock"));
+                    jenisField.setText(hasilKosmetik.getString("cosmetic_type"));
+                    tglProduksiField.setText(hasilKosmetik.getString("production_date"));
+                    tglExpField.setText(hasilKosmetik.getString("expired_date"));
+                    efekField.setText(hasilKosmetik.getString("weight"));
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 

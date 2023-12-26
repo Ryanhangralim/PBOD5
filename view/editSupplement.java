@@ -1,5 +1,6 @@
 package view;
 
+import java.sql.ResultSet;
 import java.time.LocalDate;
 
 import javax.swing.JOptionPane;
@@ -28,6 +29,8 @@ public class editSupplement extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents(int id) {
 
+        ResultSet hasilSuplemen = Suplemen.getByID(id);
+
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -53,6 +56,25 @@ public class editSupplement extends javax.swing.JDialog {
         jLabel17 = new javax.swing.JLabel();
         cancelButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
+
+        if (hasilSuplemen != null) {
+            try {
+                while (hasilSuplemen.next()) {
+                    namaField.setText(hasilSuplemen.getString("name"));
+                    brandField.setText(hasilSuplemen.getString("brand"));
+                    produsenField.setText(hasilSuplemen.getString("pharma"));
+                    hargaField.setText(Integer.toString(hasilSuplemen.getInt("price")));
+                    stockField.setText(Integer.toString(hasilSuplemen.getInt("stock")));
+                    jenisField.setText(hasilSuplemen.getString("category"));
+                    tglProduksiField.setText(hasilSuplemen.getString("production_date"));
+                    tglExpField.setText(hasilSuplemen.getString("expired_date"));
+                    dosisField.setText(hasilSuplemen.getString("dose"));
+                    nutrisiField.setText(hasilSuplemen.getString("nutrition"));
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
