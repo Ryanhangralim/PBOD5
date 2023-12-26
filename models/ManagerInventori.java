@@ -11,6 +11,7 @@ import java.sql.Statement;
  
 import config.MySQLConn;
 
+//Class managerinventori
 public class ManagerInventori {
   private Integer id;
   private String nama;
@@ -19,54 +20,67 @@ public class ManagerInventori {
   private String username;
   private String password;
 
+  //setter
   public void set_id(Integer id) {
     this.id = id;
   }
 
+  //getter
   public Integer get_id() {
     return this.id;
   }
 
+  //setter
   public void set_nama(String nama) {
     this.nama = nama;
   }
 
+  //getter
   public String get_nama() {
     return this.nama;
   }
 
+  //setter
   public void set_nomortelepon(String nomor_telepon) {
     this.nomor_telepon = nomor_telepon;
   }
 
+  //getter
   public String get_nomortelepon() {
     return this.nomor_telepon;
   }
 
+  //setter
   public void set_alamat(String alamat) {
     this.alamat = alamat;
   }
 
+  //getter
   public String get_alamat() {
     return this.alamat;
   }
 
+  //setter
   public void set_username(String username) {
     this.username = username;
   }
 
+  //getter
   public String get_username() {
     return this.username;
   }
-
+ 
+  //setter
   public void set_password(String password) {
     this.password = password;
   }
 
+  //getter
   public String get_password() {
     return this.password;
   }
 
+  //method untuk menambah dan mengupdate database
   public int save() {
     int newManager = 0;
 
@@ -123,6 +137,7 @@ public class ManagerInventori {
     return newManager;
   }
 
+  //method untuk hapus berdasarkan id
   public static void delete(int ID) {
     try {
       Connection conn = MySQLConn.getConnection();
@@ -137,6 +152,7 @@ public class ManagerInventori {
     }
   }
 
+  //method untuk mendapatkan isi database
   public static ResultSet getAll() {
     try {
       Connection conn = MySQLConn.getConnection();
@@ -152,6 +168,7 @@ public class ManagerInventori {
     }
   }
 
+  //method untuk mendapatkan row berdasarkan id
   public static ResultSet getByID(int ID) {
     try {
       Connection conn = MySQLConn.getConnection();
@@ -168,6 +185,7 @@ public class ManagerInventori {
     }
   }
 
+  //method untuk mengecek username jika ada dalam database
   public static boolean checkUsername(String username) {
     int count = 0;
     PreparedStatement checkManagerusername = null;
@@ -194,6 +212,7 @@ public class ManagerInventori {
     }
   }
 
+//method untuk mengecek passsword dalam database
 public static boolean checkPassword(String username, String password) {
   String userPassword;
   PreparedStatement checkPassword = null;
