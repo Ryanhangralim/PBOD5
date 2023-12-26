@@ -176,6 +176,7 @@ public class Obat extends Produk {
     }
   }
 
+  //method untuk mencari berdasarkan nama
   public static ResultSet searchByName(String name) {
     try {
       Connection conn = MySQLConn.getConnection();
