@@ -9,42 +9,50 @@ import java.time.LocalDate;
 
 import config.MySQLConn;
 
+//class kosmetik inheritance produk
 public class Kosmetik extends Produk {
   private String jenis_kosmetik;
   private LocalDate tanggal_kadaluwarsa;
   private int berat_bersih;
 
+  //setter
   public void set_jeniskosmetik(String jenis_kosmetik) {
     this.jenis_kosmetik = jenis_kosmetik;
   }
 
+  //setter
   public void set_tanggalkadaluwarsa(LocalDate tanggal_kadaluwarsa) {
     this.tanggal_kadaluwarsa = tanggal_kadaluwarsa;
   }
 
+  //setter
   public void set_beratbersih(int berat_bersih) {
     this.berat_bersih = berat_bersih;
   }
 
+  //getter
   public String get_jeniskosmetik() {
     return this.jenis_kosmetik;
   }
 
+  //getter
   public LocalDate get_tanggalkadaluwarsa() {
     return this.tanggal_kadaluwarsa;
   }
 
+  //getter
   public int get_beratbersih() {
     return this.berat_bersih;
   }
 
+  //method untuk menambah dan mengupdate databse
   public int save() {
     int newCosmetic = 0;
 
     try {
       Connection conn = MySQLConn.getConnection();
 
-      // Insert kalau obat baru
+      // Insert kalau kosmetik baru
       if (this.get_id() == null) {
         String sql = "INSERT INTO cosmetic(name, brand, pharma, production_date, price, stock, expired_date, cosmetic_type, weight) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement updateCosmetic = conn.prepareStatement(sql);
@@ -61,7 +69,7 @@ public class Kosmetik extends Produk {
 
         newCosmetic = updateCosmetic.executeUpdate();
       }
-      // Update kalau obat sudah ada
+      // Update kalau kosmetik sudah ada
       else {
         String sql = "UPDATE cosmetic SET name = ?, brand = ?, pharma = ?, production_date = ?, price = ?, stock = ?, expired_date = ?, cosmetic_type = ?, weight = ? WHERE ID = ?";
         PreparedStatement insertnewCosmetic = conn.prepareStatement(sql);
@@ -87,6 +95,7 @@ public class Kosmetik extends Produk {
     return newCosmetic;
   }
 
+  //method untuk hapus berdasarkan id
   public static void delete(int ID) {
     try {
       Connection conn = MySQLConn.getConnection();
@@ -101,6 +110,7 @@ public class Kosmetik extends Produk {
     }
   }
 
+  //method untuk mendapatkan isi database
   public static ResultSet getAll() {
     try {
       Connection conn = MySQLConn.getConnection();
@@ -116,6 +126,7 @@ public class Kosmetik extends Produk {
     }
   }
 
+  //method untuk mendapatkan row berdasarkan id
   public static ResultSet getByID(int ID) {
     try {
       Connection conn = MySQLConn.getConnection();
@@ -132,6 +143,7 @@ public class Kosmetik extends Produk {
     }
   }
 
+  //method untuk mengupdate stock dalam database
   public static void updateStock(int id, int qty) {
     // Get MySQL connection
     Connection conn = MySQLConn.getConnection();
@@ -150,6 +162,7 @@ public class Kosmetik extends Produk {
     }
   }
 
+  //method untuk mencari berdasarkan nama
   public static ResultSet searchByName(String name) {
     try {
       Connection conn = MySQLConn.getConnection();
