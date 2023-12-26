@@ -146,6 +146,7 @@ public class AlatKesehatan extends Produk {
     }
   }
 
+  //metod untuk mencari berdasarkan nama
   public static ResultSet searchByName(String name) {
     try {
       Connection conn = MySQLConn.getConnection();
