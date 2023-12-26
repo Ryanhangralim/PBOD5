@@ -8,33 +8,39 @@ import java.sql.Statement;
 
 import config.MySQLConn;
 
+// Class alat kesehatan inheritance produk
 public class AlatKesehatan extends Produk {
   private String jenis_alat;
   private int berat;
 
+  //setter
   public void set_jenisalat(String jenis_alat) {
     this.jenis_alat = jenis_alat;
   }
 
+  //getter
   public String get_jenisalat() {
     return this.jenis_alat;
   }
 
+  //setter
   public void set_berat(int berat) {
     this.berat = berat;
   }
 
+  //getter
   public int get_berat() {
     return this.berat;
   }
 
+  //method untuk menambah dan mengupdate database
   public int save() {
     int newEquipment = 0;
 
     try {
       Connection conn = MySQLConn.getConnection();
 
-      // Insert kalau obat baru
+      // Insert alat kesehatan baru
       if (this.get_id() == null) {
         String sql = "INSERT INTO medical_equipments(name, brand, pharma, production_date, price, stock, category, weight) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement insertNewEquipment = conn.prepareStatement(sql);
@@ -50,7 +56,7 @@ public class AlatKesehatan extends Produk {
 
         newEquipment = insertNewEquipment.executeUpdate();
       }
-      // Update kalau obat sudah ada
+      // Update kalau alat kesehatan sudah ada
       else {
         String sql = "UPDATE medical_equipments SET name = ?, brand = ?, pharma = ?, production_date = ?, price = ?, stock = ?, category = ?, weight = ? WHERE ID = ?";
         PreparedStatement updateEquipment = conn.prepareStatement(sql);
@@ -74,6 +80,7 @@ public class AlatKesehatan extends Produk {
     return newEquipment;
   }
 
+  //method untuk hapus berdasarkan id
   public static void delete(int ID) {
     try {
       Connection conn = MySQLConn.getConnection();
@@ -88,6 +95,7 @@ public class AlatKesehatan extends Produk {
     }
   }
 
+  //method untuk mendapatkan isi database
   public static ResultSet getAll() {
     try {
       Connection conn = MySQLConn.getConnection();
@@ -103,6 +111,7 @@ public class AlatKesehatan extends Produk {
     }
   }
 
+  //method untuk mendapatkan row berdasarkan id
   public static ResultSet getByID(int ID) {
     try {
       Connection conn = MySQLConn.getConnection();
@@ -119,6 +128,7 @@ public class AlatKesehatan extends Produk {
     }
   }
 
+  //method untuk mengupdate stock dalam database
   public static void updateStock(int id, int qty) {
     // Get MySQL connection
     Connection conn = MySQLConn.getConnection();
@@ -132,7 +142,6 @@ public class AlatKesehatan extends Produk {
       updateMedicalEquipment.executeUpdate();
 
     } catch (Exception e) {
-      // TODO: handle exception
       System.out.println("Failed to update medical equipment stock" + e);
     }
   }
